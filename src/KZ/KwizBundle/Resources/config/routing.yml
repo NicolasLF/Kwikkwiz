@@ -15,7 +15,7 @@ kz_kwiz_game:
     defaults: { _controller: KZKwizBundle:Game:index }
 
 kz_kwiz_test:
-    path:     /test/{id}
+    path:     /test/{party}/{id}
     defaults: { _controller: KZKwizBundle:Game:playerPosition }
 
 

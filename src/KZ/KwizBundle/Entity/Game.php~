@@ -5,7 +5,7 @@ namespace KZ\KwizBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Game
+ * Party
  *
  * @ORM\Table(name="game")
  * @ORM\Entity(repositoryClass="KZ\KwizBundle\Repository\GameRepository")
@@ -31,9 +31,15 @@ class Game
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User", fetch="EAGER")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="KZ\KwizBundle\Entity\Square")
+     */
+    private $square;
+
 
 
     /**
@@ -89,9 +95,8 @@ class Game
      *
      * @return int
      */
-    public function getUser()
+    public function getUsera()
     {
         return $this->user;
     }
 }
-
