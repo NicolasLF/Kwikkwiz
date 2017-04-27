@@ -25,28 +25,32 @@ class LoadPartyData extends AbstractFixture implements FixtureInterface, Ordered
                 'active' => 0,
                 'level' => $this->getReference('level1'),
                 'mode' => 1,
-                'nbPlayer' => 4
+                'nbPlayer' => 4,
+                'full' => true
             ),
             array(
                 'name' => "Party 2",
                 'active' => 0,
                 'level' => $this->getReference('level2'),
                 'mode' => 2,
-                'nbPlayer' => 3
+                'nbPlayer' => 3,
+                'full' => true
             ),
             array(
                 'name' => "Party 3",
                 'active' => 0,
                 'level' => $this->getReference('level3'),
                 'mode' => 3,
-                'nbPlayer' => 2
+                'nbPlayer' => 2,
+                'full' => true
             ),
             array(
                 'name' => "Party 4",
                 'active' => 0,
                 'level' => $this->getReference('level2'),
                 'mode' => 3,
-                'nbPlayer' => 1
+                'nbPlayer' => 1,
+                'full' => true
             ),
         );
         $i = 1;
@@ -57,6 +61,7 @@ class LoadPartyData extends AbstractFixture implements FixtureInterface, Ordered
             $sql->setLevel($item['level']);
             $sql->setMode($item['mode']);
             $sql->setNbPlayer($item['nbPlayer']);
+            $sql->setFull($item['full']);
             $this->addReference('party'.$i++, $sql);
             $manager->persist($sql);
             $manager->flush();

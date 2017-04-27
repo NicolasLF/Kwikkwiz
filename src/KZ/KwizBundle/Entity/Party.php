@@ -52,9 +52,16 @@ class Party
     /**
      * @var int
      *
-     * @ORM\Column(name="active", type="integer")
+     * @ORM\Column(name="active", type="integer", nullable=true, options={"default" : 1})
      */
     private $active;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="full", type="boolean", nullable=true, options={"default" : false})
+     */
+    private $full;
 
 
     /**
@@ -185,5 +192,29 @@ class Party
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Set full
+     *
+     * @param boolean $full
+     *
+     * @return Party
+     */
+    public function setFull($full)
+    {
+        $this->full = $full;
+
+        return $this;
+    }
+
+    /**
+     * Get full
+     *
+     * @return boolean
+     */
+    public function getFull()
+    {
+        return $this->full;
     }
 }
