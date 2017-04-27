@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\History;
 
 
-class LoadHistoryData
+class LoadHistoryData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {

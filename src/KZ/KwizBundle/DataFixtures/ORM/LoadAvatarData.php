@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\Avatar;
 
-class LoadAvatarData
+class LoadAvatarData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {

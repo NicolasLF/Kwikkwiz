@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\Game;
 
 
-class LoadGameData
+class LoadGameData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {

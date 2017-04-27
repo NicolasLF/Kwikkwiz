@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\Category;
 
 
-class LoadCategoryData
+class LoadCategoryData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
