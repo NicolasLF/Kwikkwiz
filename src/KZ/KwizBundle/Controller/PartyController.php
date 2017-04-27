@@ -71,13 +71,17 @@ class PartyController extends Controller
         $form = $this->createForm('KZ\KwizBundle\Form\PartyType', $party);
         $form->handleRequest($request);
 
-//        var_dump($form);
-//        die();
         if ($form->isSubmitted() && $form->isValid()) {
+            $party->setActive(1);
+            $party->setFull(false);
             $em = $this->getDoctrine()->getManager();
             $em->persist($party);
             $em->flush();
-
+            $game = new Game;
+            $game->setUser($this->getUser());
+            $game->setParty($party);
+            $em->persist($game);
+            $em->flush();
             return $this->redirectToRoute('kz_kwiz_game', array('id' => $party->getId()));
         }
 

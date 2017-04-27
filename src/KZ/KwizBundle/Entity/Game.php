@@ -22,14 +22,12 @@ class Game
     private $id;
 
     /**
-     * @var int
      *
      * @ORM\ManyToOne(targetEntity="Party")
      */
     private $party;
 
     /**
-     * @var int
      *
      * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User", fetch="EAGER")
      */

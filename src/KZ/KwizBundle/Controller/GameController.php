@@ -114,13 +114,6 @@ class GameController extends Controller
         }
         return false;
     }
-
-    public function jsToPhp($id, $query)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $party = $em->getRepository('KZKwizBundle:Party')->find($id);
-        return $query($party);
-    }
     public function turn(party $party)
     {
         $position = $this->playerPositionAction($party, $this->getUser()->getId());
@@ -130,6 +123,10 @@ class GameController extends Controller
     {
         $board = $this->getBoard($party);
         if ($this->isReady($party)) {
+            $party->setFull(true);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($party);
+            $em->flush();
             if ($board == NULL) {
                 $board = $this->generateBoard($party);
             }
@@ -197,7 +194,6 @@ class GameController extends Controller
                 'party_id' => $idParty,
             ));
         }
-        return 'hello';
     }
 
     public function playerPositionAction(Party $party, $id)
@@ -213,5 +209,13 @@ class GameController extends Controller
 
 
     }
-    
+
+
+    public function jsToPhp($id, $query)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $party = $em->getRepository('KZKwizBundle:Party')->find($id);
+        return $query($party);
+    }
+
 }
