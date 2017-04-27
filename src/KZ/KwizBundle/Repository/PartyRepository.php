@@ -11,7 +11,7 @@ namespace KZ\KwizBundle\Repository;
 class PartyRepository extends \Doctrine\ORM\EntityRepository
 {
     public function countNbPlayer($id) {
-        $query = $this->getEntityManager()->createQuery("SELECT COUNT(g) FROM KZKwizBundle:Game g WHERE g.id = :id");
+        $query = $this->getEntityManager()->createQuery("SELECT COUNT(g) FROM KZKwizBundle:Game g WHERE g.party = :id");
         $query->setParameter('id', $id);
 
         return $query->getSingleScalarResult();

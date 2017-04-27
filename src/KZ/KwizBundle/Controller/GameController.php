@@ -8,12 +8,81 @@
 
 namespace KZ\KwizBundle\Controller;
 
+use KZ\KwizBundle\Entity\Square;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class GameController extends Controller
 {
+    public function getCategories()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('KZKwizBundle:Category')->findAll();
+        return $categories;
+    }
+    public function generateBoardAction($id)
+    {
+        $board = [];
+        //Génération des cases questions
+        for($i=0;$i<=26;$i++){
+            $board[$i]['category'] = rand(0,5);
+            $board[$i]['type'] = 'Q';
+        }
+        //Génération des cases bonus
+        for($i=27;$i<=29;$i++){
+            $board[$i]['type'] = 'B';
+            $board[$i]['category'] = rand(0,5);
+        }
+        //Génération des cases malus
+        for($i=30;$i<=32;$i++){
+            $board[$i]['type'] = 'M';
+            $board[$i]['category'] = rand(0,5);
+        }
+        //Génération des cases pièges
+        for($i=33;$i<=35;$i++){
+            $board[$i]['type'] = 'P';
+            $board[$i]['category'] = rand(0,5);
+        }
+        //Génération des cases aléatoires
+        for($i=36;$i<=38;$i++){
+            $board[$i]['type'] = 'A';
+            $board[$i]['category'] = rand(0,5);
+        }
+        //Génération de la prison
+        $board[39]['type'] = 'J';
+        $board[39]['category'] = rand(0,5);
+        shuffle($board);
+        $categories = $this->getCategories();
+        for($i=0;$i<39;$i++){
+            $em = $this->getDoctrine()->getManager();
+            $square = new Square();
+            $party = $em->getRepository('KZKwizBundle:Party')->find($id);
+            $square->setParty($party);
+            $square->setType($board[$i]['type']);
+            $square->setCategory($categories[$board[$i]['category']]);
+            $square->setNumber($i);
+            $em->persist($square);
+            $em->flush();
+        }
+        return $board;
+    }
+    public function isReady($id)
+    {
+        $partyController = new PartyController();
+        $party = $partyController->getParty($id);
+        if($nbPlayer==$party->getNbPlayer()){
+            die('prêt');
+        }else{
+            die('pas prêt');
+        }
+    }
     public function indexAction($id)
     {
-        return $this->render('KZKwizBundle:Game:game.html.twig');
+        $partyController = new PartyController();
+        $party = $partyController->getParty($id);
+        print_r($party);
+        //$nbPlayer = $partyController->getPlayers($id);
+        //$this->isReady($id);
+        $board = $this->generateBoardAction($id);
+        return $this->render('KZKwizBundle:Game:game.html.twig', ['board'=>$board]);
     }
 }

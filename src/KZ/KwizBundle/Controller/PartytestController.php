@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  *
  * @Route("party")
  */
-class PartyController extends Controller
+class PartytestController extends Controller
 {
     /**
      * Lists all party entities.
