@@ -20,11 +20,34 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class GameController extends Controller
 {
+    public function getSquare(Party $party, $num)
+    {
+        $em = $this->getDoctrine()->getManager();
+        return $em->getRepository('KZKwizBundle:Square')->findOneBy(['party'=>$party, 'number'=>$num]);
+    }
+    public function startGame(Party $party)
+    {
+        $games = $this->getGames($party);
+        $square = $this->getSquare($party, '0');
+        foreach ($games as $game)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $game->getUser()->getId();
+            $game = $em->getRepository('KZKwizBundle:Game')->find($game->getId());
+            $game->setSquare($square);
+            $em->flush();
+        }
+    }
     public function getCategories()
     {
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('KZKwizBundle:Category')->findAll();
         return $categories;
+    }
+    public function getGames(Party $party)
+    {
+        $em = $this->getDoctrine()->getManager();
+        return $em->getRepository('KZKwizBundle:Game')->findBy(['party'=>$party]);
     }
     public function generateBoard(Party $party)
     {
@@ -99,6 +122,7 @@ class GameController extends Controller
             if($board==NULL){
                 $board = $this->generateBoard($party);
             }
+            $this->startGame($party);
         }
         return $this->render('KZKwizBundle:Game:game.html.twig', ['board'=>$board]);
     }
