@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\Party;
 
 
-class LoadPartyData
+class LoadPartyData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
