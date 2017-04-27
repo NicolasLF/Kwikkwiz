@@ -47,12 +47,58 @@ body{
 /********************** FIN STYLE PAGE WELCOME  *************************/
 
 /* FORMULAIRES (pages login & register)-------------------------------------------------------------------------------*/
-
-.formStyle {
-    padding-top: 60px;
+.formulaires{
+    /*background-color: #66FFCC;*/
+    height:100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .formBrandName {
+    width: 100%;
+    display:block;
+    margin:auto;
+    padding-top: 40px;
+    padding-bottom: 30px;
 
+}
+
+.formBrandLogo {
+    width: 100%;
+    display:block;
+    margin:auto;
+    padding-top: 37px;
+}
+
+.formAvatar {
+    width: 100%;
+    display:block;
+    margin:auto;
+    padding: 0;
+}
+
+.noMarginBottom {
+    margin-bottom: 0;
+}
+
+.formLabel {
+    font-size: 0.8rem;
+    color: #0000FF;
+}
+
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #0000FF;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
 }
 /* END FORMULAIRES (pages login & register)---------------------------------------------------------------------------*/
