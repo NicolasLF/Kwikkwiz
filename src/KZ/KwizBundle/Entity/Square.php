@@ -24,16 +24,42 @@ class Square
     /**
      * @var int
      *
-     * @ORM\Column(name="Board", type="integer")
+     * @ORM\Column(name="Party", type="integer")
+     * @ORM\ManyToOne(targetEntity="Party")
      */
-    private $board;
+    private $party;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="Type", type="string", length=255)
      */
     private $type;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="Category", type="integer")
+     * @ORM\ManyToOne(targetEntity="Category")
+     */
+    private $category;
+
+
+    /**
+     * @return int
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param int $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
 
 
     /**
@@ -49,25 +75,25 @@ class Square
     /**
      * Set board
      *
-     * @param integer $board
+     * @param integer $party
      *
      * @return Square
      */
-    public function setBoard($board)
+    public function setParty($party)
     {
-        $this->board = $board;
+        $this->party = $party;
 
         return $this;
     }
 
     /**
-     * Get board
+     * Get party
      *
      * @return int
      */
-    public function getBoard()
+    public function getParty()
     {
-        return $this->board;
+        return $this->party;
     }
 
     /**

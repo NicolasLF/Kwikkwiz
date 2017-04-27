@@ -46,6 +46,7 @@ class Party
      * @var int
      *
      * @ORM\Column(name="level", type="integer")
+     * @ORM\ManyToOne(targetEntity="Level")
      */
     private $level;
 

@@ -39,6 +39,7 @@ class Question
      * @var int
      *
      * @ORM\Column(name="level", type="integer")
+     * @ORM\ManyToOne(targetEntity="Level")
      */
     private $level;
 
@@ -46,6 +47,7 @@ class Question
      * @var int
      *
      * @ORM\Column(name="category", type="integer")
+     * @ORM\ManyToOne(targetEntity="Category")
      */
     private $category;
 
