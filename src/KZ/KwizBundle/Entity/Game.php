@@ -5,7 +5,7 @@ namespace KZ\KwizBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Game
+ * Party
  *
  * @ORM\Table(name="game")
  * @ORM\Entity(repositoryClass="KZ\KwizBundle\Repository\GameRepository")
