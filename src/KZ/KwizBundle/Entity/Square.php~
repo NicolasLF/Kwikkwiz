@@ -118,3 +118,4 @@ class Square
         return $this->type;
     }
 }
+
