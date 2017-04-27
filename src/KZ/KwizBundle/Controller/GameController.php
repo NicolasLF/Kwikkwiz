@@ -8,6 +8,7 @@
 
 namespace KZ\KwizBundle\Controller;
 
+use KZ\KwizBundle\Entity\Party;
 use KZ\KwizBundle\Entity\Square;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -19,7 +20,7 @@ class GameController extends Controller
         $categories = $em->getRepository('KZKwizBundle:Category')->findAll();
         return $categories;
     }
-    public function generateBoardAction($id)
+    public function generateBoard(Party $party)
     {
         $board = [];
         //Génération des cases questions
@@ -52,10 +53,9 @@ class GameController extends Controller
         $board[39]['category'] = rand(0,5);
         shuffle($board);
         $categories = $this->getCategories();
-        for($i=0;$i<39;$i++){
+        for($i=0;$i<=39;$i++){
             $em = $this->getDoctrine()->getManager();
             $square = new Square();
-            $party = $em->getRepository('KZKwizBundle:Party')->find($id);
             $square->setParty($party);
             $square->setType($board[$i]['type']);
             $square->setCategory($categories[$board[$i]['category']]);
@@ -65,24 +65,35 @@ class GameController extends Controller
         }
         return $board;
     }
-    public function isReady($id)
+    function getBoard(Party $party)
     {
-        $partyController = new PartyController();
-        $party = $partyController->getParty($id);
-        if($nbPlayer==$party->getNbPlayer()){
-            die('prêt');
-        }else{
-            die('pas prêt');
-        }
+        $em = $this->getDoctrine()->getManager();
+        $board = $em->getRepository('KZKwizBundle:Square')->findBy(['party'=>$party]);
+        return $board;
     }
-    public function indexAction($id)
+    public function isReady(Party $party)
     {
-        $partyController = new PartyController();
-        $party = $partyController->getParty($id);
-        print_r($party);
-        //$nbPlayer = $partyController->getPlayers($id);
-        //$this->isReady($id);
-        $board = $this->generateBoardAction($id);
+        $em = $this->getDoctrine()->getManager();
+        $nbPlayer = $em->getRepository('KZKwizBundle:Party')->countNbPlayer($party);
+        if($nbPlayer==$party->getNbPlayer()){
+            return true;
+        }
+        return false;
+    }
+    public function jsToPhp($id, $query)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $party = $em->getRepository('KZKwizBundle:Party')->find($id);
+        return $query($party);
+    }
+    public function indexAction(Party $party)
+    {
+        $board = $this->getBoard($party);
+        if($this->isReady($party)){
+            if($board==NULL){
+                $board = $this->generateBoard($party);
+            }
+        }
         return $this->render('KZKwizBundle:Game:game.html.twig', ['board'=>$board]);
     }
 }

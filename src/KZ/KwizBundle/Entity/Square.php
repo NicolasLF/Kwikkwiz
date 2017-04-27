@@ -22,7 +22,6 @@ class Square
     private $id;
 
     /**
-     * @var int
      *
      * @ORM\ManyToOne(targetEntity="Party")
      */
