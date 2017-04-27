@@ -13,8 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class GameController extends Controller
 {
 
-    public function joinAction()
+    public function indexAction()
     {
-        return $this->render('KZKwizBundle:join-game.html.twig');
+        return $this->render('KZKwizBundle:Game:join-game.html.twig');
     }
 }
