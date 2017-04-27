@@ -1,3 +1,6 @@
 kz_kwiz_homepage:
     path:     /
     defaults: { _controller: KZKwizBundle:Default:index }
+kz_kwiz_join_game:
+    path:     /join_game
+    defaults: { _controller: KZKwizBundle:Game:join }
