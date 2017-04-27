@@ -1,10 +1,10 @@
-@media screen and (max-width: 780px) {
-    body {
-        max-width: 413px;
-        font-family: 'Nunito', sans-serif;
-    }
+/* FORMULAIRES (pages login & register)-------------------------------------------------------------------------------*/
 
-    .container {
-        width: 100%;
-    }
+.formStyle {
+    padding-top: 60px;
 }
+
+.formBrandName {
+
+}
+/* END FORMULAIRES (pages login & register)---------------------------------------------------------------------------*/
