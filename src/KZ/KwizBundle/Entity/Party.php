@@ -52,14 +52,14 @@ class Party
     /**
      * @var int
      *
-     * @ORM\Column(name="active", type="integer", options={"default" : 1})
+     * @ORM\Column(name="active", type="integer", nullable=true, options={"default" : 1})
      */
     private $active;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="full", type="boolean")
+     * @ORM\Column(name="full", type="boolean", nullable=true, options={"default" : false})
      */
     private $full;
 
