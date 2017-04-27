@@ -1,3 +1,7 @@
+kz_kwiz:
+    resource: "@KZKwizBundle/Resources/config/routing.yml"
+    prefix:   /
+
 kz_user:
     resource: "@KZUserBundle/Resources/config/routing.yml"
     prefix:   /
