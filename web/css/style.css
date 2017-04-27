@@ -47,3 +47,14 @@ body{
 }
 
 /********************** FIN STYLE PAGE WELCOME  *************************/
+
+/* FORMULAIRES (pages login & register)-------------------------------------------------------------------------------*/
+
+.formStyle {
+    padding-top: 60px;
+}
+
+.formBrandName {
+
+}
+/* END FORMULAIRES (pages login & register)---------------------------------------------------------------------------*/
