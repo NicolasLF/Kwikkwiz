@@ -20,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class GameController extends Controller
 {
-    public function getSquare(Party $party, $num)
+    public function getThisSquare(Party $party, $num)
     {
         $em = $this->getDoctrine()->getManager();
         return $em->getRepository('KZKwizBundle:Square')->findOneBy(['party'=>$party, 'number'=>$num]);
@@ -28,7 +28,7 @@ class GameController extends Controller
     public function startGame(Party $party)
     {
         $games = $this->getGames($party);
-        $square = $this->getSquare($party, '0');
+        $square = $this->getThisSquare($party, '0');
         foreach ($games as $game)
         {
             $em = $this->getDoctrine()->getManager();
@@ -37,6 +37,7 @@ class GameController extends Controller
             $game->setSquare($square);
             $em->flush();
         }
+        return true;
     }
     public function getCategories()
     {
@@ -115,6 +116,11 @@ class GameController extends Controller
         $party = $em->getRepository('KZKwizBundle:Party')->find($id);
         return $query($party);
     }
+    public function turn(party $party)
+    {
+        $position = $this->playerPositionAction($party, $this->getUser()->getId());
+        return $position;
+    }
     public function indexAction(Party $party)
     {
         $board = $this->getBoard($party);
@@ -122,7 +128,9 @@ class GameController extends Controller
             if($board==NULL){
                 $board = $this->generateBoard($party);
             }
-            $this->startGame($party);
+            if($this->startGame($party)){
+                dump($this->turn($party));
+            }
         }
         return $this->render('KZKwizBundle:Game:game.html.twig', ['board'=>$board]);
     }
@@ -157,7 +165,7 @@ class GameController extends Controller
             //Remplie la table history des autres Users
             $game = new Game();
             $games = $em->getRepository($game)->findBy(array(
-                    'party_id' => $idParty,
+                'party_id' => $idParty,
             ));
 
 
@@ -168,9 +176,7 @@ class GameController extends Controller
     public function playerPositionAction(Party $party,$id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $user = $em->getRepository('KZUserBundle:User')->find($id);
-
         $games = $em->getRepository('KZKwizBundle:Game')->findOneBy(
             array(
                 'party' => $party,
