@@ -1,0 +1,10 @@
+{% block body %}
+    <h1>Rejoindre une partie</h1>
+    <ul>
+        {% for party in parties %}
+            <li>
+                <a href="/joinParty/{{ party.id }}">{{ party.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock  %}

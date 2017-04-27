@@ -8,21 +8,31 @@
 
 namespace KZ\KwizBundle\Controller;
 
+use KZ\KwizBundle\Entity\Party;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\BrowserKit\Request;
 
 class PartyController extends Controller
 {
 
-    public function getPartiesActive($active)
+    public function getParty($id)
     {
         $em = $this->getDoctrine()->getManager();
-
+        $party = $em->getRepository('KZKwizBundle:Party')->find($id);
+        return $party;
+    }
+    public function getPartiesActive($active)
+    {
         $parties = $em->getRepository('KZKwizBundle:Party')->findBy(['active'=>$active]);
         return $parties;
     }
-    public function indexAction()
+    public function indexAction($id)
     {
-        $parties = $this->getPartiesActive(0);
-        return $this->render('KZKwizBundle:Party:join-party.html.twig', ['parties'=>$parties]);
+        if($id>0){
+            $party = $this->getParty($id);
+
+        }
+        $parties = $this->getPartiesActive(1);
+        return $this->render('KZKwizBundle:Party:joinParty.html.twig', ['parties'=>$parties]);
     }
 }

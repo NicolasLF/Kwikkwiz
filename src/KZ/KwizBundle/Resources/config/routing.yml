@@ -1,6 +1,9 @@
 kz_kwiz_homepage:
     path:     /
     defaults: { _controller: KZKwizBundle:Default:index }
-kz_kwiz_join_party:
-    path:     /join_party
-    defaults: { _controller: KZKwizBundle:Party:index }
+kz_kwiz_joinParty:
+    path:     /joinParty/{id}
+    defaults: { _controller: KZKwizBundle:Party:index, id: 0 }
+kz_kwiz_game:
+    path:     /game/{id}
+    defaults: { _controller: KZKwizBundle:Game:index }
