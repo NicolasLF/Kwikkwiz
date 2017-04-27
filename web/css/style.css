@@ -34,7 +34,6 @@ body{
     max-height: 50% !important;
 }
 
-
 .slider .indicators .indicator-item{
     background-color : white;
 }
@@ -43,5 +42,8 @@ body{
     background-color: #66FFCC;
 }
 
+.creaButton{
+    padding-bottom: 20px;
+}
 
 /********************** FIN STYLE PAGE WELCOME  *************************/
