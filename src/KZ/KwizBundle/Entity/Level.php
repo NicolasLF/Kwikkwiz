@@ -94,4 +94,3 @@ class Level
         return $this->color;
     }
 }
-

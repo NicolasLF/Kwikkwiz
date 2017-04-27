@@ -63,3 +63,4 @@ class Avatar
         return $this->img;
     }
 }
+

@@ -31,7 +31,7 @@ class History
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="User")
      */
     private $user;
 
@@ -125,3 +125,4 @@ class History
         return $this->rank;
     }
 }
+

@@ -5,12 +5,12 @@ namespace KZ\KwizBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * Level
  *
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="KZ\KwizBundle\Repository\CategoryRepository")
+ * @ORM\Table(name="level")
+ * @ORM\Entity(repositoryClass="KZ\KwizBundle\Repository\LevelRepository")
  */
-class Category
+class Level
 {
     /**
      * @var int
@@ -35,13 +35,6 @@ class Category
      */
     private $color;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="icon", type="string", length=255)
-     */
-    private $icon;
-
 
     /**
      * Get id
@@ -58,7 +51,7 @@ class Category
      *
      * @param string $name
      *
-     * @return Category
+     * @return Level
      */
     public function setName($name)
     {
@@ -82,7 +75,7 @@ class Category
      *
      * @param string $color
      *
-     * @return Category
+     * @return Level
      */
     public function setColor($color)
     {
@@ -100,28 +93,5 @@ class Category
     {
         return $this->color;
     }
-
-    /**
-     * Set icon
-     *
-     * @param string $icon
-     *
-     * @return Category
-     */
-    public function setIcon($icon)
-    {
-        $this->icon = $icon;
-
-        return $this;
-    }
-
-    /**
-     * Get icon
-     *
-     * @return string
-     */
-    public function getIcon()
-    {
-        return $this->icon;
-    }
 }
+

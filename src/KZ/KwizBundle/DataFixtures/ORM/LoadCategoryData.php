@@ -8,12 +8,14 @@
 
 namespace KZ\KwizBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\Category;
 
 
-class LoadCategoryData implements FixtureInterface
+class LoadCategoryData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -49,14 +51,22 @@ class LoadCategoryData implements FixtureInterface
                 'icon' => '',
             ),
         );
+        $i = 1;
         foreach ($data as $item){
             $sql = new Category();
             $sql->setName($item['name']);
             $sql->setColor($item['color']);
             $sql->setIcon($item['icon']);
+            $this->addReference('category'.$i++, $sql);
             $manager->persist($sql);
             $manager->flush();
         }
         $manager->flush();
+    }
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 3;
     }
 }

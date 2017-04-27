@@ -24,7 +24,6 @@ class Game
     /**
      * @var int
      *
-     * @ORM\Column(name="party", type="integer")
      * @ORM\ManyToOne(targetEntity="Party")
      */
     private $party;
@@ -32,8 +31,7 @@ class Game
     /**
      * @var int
      *
-     * @ORM\Column(name="user", type="integer")
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User")
      */
     private $user;
 
@@ -96,4 +94,3 @@ class Game
         return $this->user;
     }
 }
-

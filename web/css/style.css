@@ -1,6 +1,7 @@
 @media screen and (max-width: 780px) {
     body {
         max-width: 413px;
+        font-family: 'Nunito', sans-serif;
     }
 
     .container {

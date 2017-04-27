@@ -8,11 +8,13 @@
 
 namespace KZ\KwizBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\Avatar;
 
-class LoadAvatarData implements FixtureInterface
+class LoadAvatarData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -30,12 +32,21 @@ class LoadAvatarData implements FixtureInterface
                 'img' => 'avatar4.png',
             ),
         );
-        foreach ($data as $item){
+        $i = 1;
+        foreach ($data as $item) {
             $sql = new Avatar();
             $sql->setImg($item['img']);
             $manager->persist($sql);
             $manager->flush();
+            $this->addReference('avatar' . $i, $sql);
+            $i++;
         }
-        $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 1;
     }
 }

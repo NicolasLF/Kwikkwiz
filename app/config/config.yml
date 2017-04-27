@@ -80,7 +80,6 @@ fos_user:
         form:
             type: KZ\UserBundle\Form\RegistrationType
 
-
 assetic:
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
