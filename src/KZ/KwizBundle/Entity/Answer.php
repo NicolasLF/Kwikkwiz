@@ -25,6 +25,7 @@ class Answer
      * @var int
      *
      * @ORM\Column(name="question", type="integer")
+     * @ORM\ManyToOne(targetEntity="Question")
      */
     private $question;
 

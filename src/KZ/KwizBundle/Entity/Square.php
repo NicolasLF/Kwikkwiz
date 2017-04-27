@@ -25,6 +25,7 @@ class Square
      * @var int
      *
      * @ORM\Column(name="Board", type="integer")
+     * @ORM\ManyToOne(targetEntity="Board")
      */
     private $board;
 

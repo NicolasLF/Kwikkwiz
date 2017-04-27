@@ -25,6 +25,7 @@ class Game
      * @var int
      *
      * @ORM\Column(name="party", type="integer")
+     * @ORM\ManyToOne(targetEntity="Party")
      */
     private $party;
 
@@ -32,6 +33,7 @@ class Game
      * @var int
      *
      * @ORM\Column(name="user", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
      */
     private $user;
 
