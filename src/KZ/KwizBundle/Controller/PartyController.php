@@ -43,7 +43,7 @@ class PartyController extends Controller
     /**
      * Creates a new party entity.
      *
-     * @Route("/new_game", name="kz_kwiz_new_game")
+     * @Route("/newGame", name="kz_kwiz_new_game")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
