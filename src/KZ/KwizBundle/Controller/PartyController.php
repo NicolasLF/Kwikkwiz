@@ -71,6 +71,8 @@ class PartyController extends Controller
         $form = $this->createForm('KZ\KwizBundle\Form\PartyType', $party);
         $form->handleRequest($request);
 
+//        var_dump($form);
+//        die();
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($party);
