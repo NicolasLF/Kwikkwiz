@@ -31,7 +31,7 @@ class PartyController extends Controller
         $parties = $em->getRepository('KZKwizBundle:Party')->findBy(['active'=>$active, 'full'=>$full]);
         return $parties;
     }
-    public function getNbPlayer($id)
+    public function getPlayers($id)
     {
         $em = $this->getDoctrine()->getManager();
         $nbPlayer = $em->getRepository('KZKwizBundle:Party')->countNbPlayer($id);
@@ -47,7 +47,7 @@ class PartyController extends Controller
             $game->setParty($party);
             $em->persist($game);
             $em->flush();
-            $nbPlayerActive = $this->getNbPlayer($id);
+            $nbPlayerActive = $this->getPlayers($party);
             if($nbPlayerActive==$party->getNbPlayer()){
                 $party->setFull(true);
                 $em->persist($party);
@@ -62,7 +62,7 @@ class PartyController extends Controller
     /**
      * Creates a new party entity.
      *
-     * @Route("/new_game", name="kz_kwiz_new_game")
+     * @Route("/newGame", name="kz_kwiz_new_game")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)

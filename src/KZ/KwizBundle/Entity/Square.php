@@ -22,7 +22,6 @@ class Square
     private $id;
 
     /**
-     * @var int
      *
      * @ORM\ManyToOne(targetEntity="Party")
      */
@@ -41,6 +40,29 @@ class Square
      * @ORM\ManyToOne(targetEntity="Category")
      */
     private $category;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="Number", type="integer")
+     */
+    private $number;
+
+    /**
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param int $number
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+    }
 
 
     /**
