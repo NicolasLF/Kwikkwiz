@@ -22,8 +22,9 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('Avatar', EntityType::class, array(
-            'class' => 'KZKwizBundle:Avatar'
-        ));
+                'class' => 'KZKwizBundle:Avatar',
+                'choice_label' => 'img',
+            ));
     }
 
     public function getParent()
