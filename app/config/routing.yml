@@ -1,3 +1,7 @@
+kz_kwiz_party:
+    resource: "@KZKwizBundle/Controller/PartyController.php"
+    type:     annotation
+
 kz_kwiz:
     resource: "@KZKwizBundle/Resources/config/routing.yml"
     prefix:   /
