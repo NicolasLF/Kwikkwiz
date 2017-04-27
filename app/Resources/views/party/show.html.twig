@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Party</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ party.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ party.name }}</td>
+            </tr>
+            <tr>
+                <th>Mode</th>
+                <td>{{ party.mode }}</td>
+            </tr>
+            <tr>
+                <th>Nbplayer</th>
+                <td>{{ party.nbPlayer }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ party.active }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('party_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('party_edit', { 'id': party.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
