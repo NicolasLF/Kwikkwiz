@@ -1,14 +1,3 @@
-/* FORMULAIRES (pages login & register)-------------------------------------------------------------------------------*/
-
-.formStyle {
-    padding-top: 60px;
-}
-
-.formBrandName {
-
-}
-/* END FORMULAIRES (pages login & register)---------------------------------------------------------------------------*/
-
 /********************** DEBUT GENERATEUR DES FONTS FAMILY  *************************/
 
 @font-face {
@@ -56,3 +45,14 @@ body{
 
 
 /********************** FIN STYLE PAGE WELCOME  *************************/
+
+/* FORMULAIRES (pages login & register)-------------------------------------------------------------------------------*/
+
+.formStyle {
+    padding-top: 60px;
+}
+
+.formBrandName {
+
+}
+/* END FORMULAIRES (pages login & register)---------------------------------------------------------------------------*/
