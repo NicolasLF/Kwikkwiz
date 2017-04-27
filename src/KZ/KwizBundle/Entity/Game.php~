@@ -5,7 +5,7 @@ namespace KZ\KwizBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Game
+ * Party
  *
  * @ORM\Table(name="game")
  * @ORM\Entity(repositoryClass="KZ\KwizBundle\Repository\GameRepository")
@@ -22,18 +22,22 @@ class Game
     private $id;
 
     /**
-     * @var int
      *
      * @ORM\ManyToOne(targetEntity="Party")
      */
     private $party;
 
     /**
-     * @var int
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User", fetch="EAGER")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="KZ\KwizBundle\Entity\Square")
+     */
+    private $square;
+
 
 
     /**
@@ -89,9 +93,42 @@ class Game
      *
      * @return int
      */
+    public function getUsera()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \KZ\UserBundle\Entity\User
+     */
     public function getUser()
     {
         return $this->user;
     }
-}
 
+    /**
+     * Set square
+     *
+     * @param \KZ\KwizBundle\Entity\Square $square
+     *
+     * @return Game
+     */
+    public function setSquare(\KZ\KwizBundle\Entity\Square $square = null)
+    {
+        $this->square = $square;
+
+        return $this;
+    }
+
+    /**
+     * Get square
+     *
+     * @return \KZ\KwizBundle\Entity\Square
+     */
+    public function getSquare()
+    {
+        return $this->square;
+    }
+}
