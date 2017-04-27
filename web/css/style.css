@@ -8,3 +8,51 @@
 
 }
 /* END FORMULAIRES (pages login & register)---------------------------------------------------------------------------*/
+
+/********************** DEBUT GENERATEUR DES FONTS FAMILY  *************************/
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/Nunito/Nunito-Regular.eot');
+    src: url('../fonts/Nunito/Nunito-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Nunito/Nunito-Regular.woff') format('woff'),
+    url('../fonts/Nunito/Nunito-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nunito_bold';
+    src: url('../fonts/Nunito/Nunito-Bold.eot');
+    src: url('../fonts/Nunito/Nunito-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Nunito/Nunito-Bold.woff') format('woff'),
+    url('../fonts/Nunito/Nunito-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/********************** FIN GENERATEUR DES FONTS FAMILY  *************************/
+
+
+body{
+        font-family: 'Nunito', sans-serif;
+    }
+
+
+/********************** DEBUT STYLE PAGE WELCOME  *************************/
+.logoWelcome{
+    max-width: 50% !important;
+    max-height: 50% !important;
+}
+
+
+.slider .indicators .indicator-item{
+    background-color : white;
+}
+
+.slider .indicators .indicator-item.active{
+    background-color: #66FFCC;
+}
+
+
+/********************** FIN STYLE PAGE WELCOME  *************************/
