@@ -1,5 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
+<!--Login Register-->
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register', 'id': 'registration_form'}}) }}
 <div class="form-group" id="fos_user_registration_form">
     <div class="row">
@@ -44,4 +44,5 @@
     <button type="submit" class="btn btn-primary" value="{{ 'registration.submit'|trans }}">Register Now</button>
 </div>
 {{ form_end(form) }}
+<!--Register Form Ends-->
 
