@@ -52,9 +52,16 @@ class Party
     /**
      * @var int
      *
-     * @ORM\Column(name="active", type="integer")
+     * @ORM\Column(name="active", type="integer", options={"default" : 1})
      */
     private $active;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="full", type="boolean")
+     */
+    private $full;
 
 
     /**
@@ -187,4 +194,3 @@ class Party
         return $this->active;
     }
 }
-
