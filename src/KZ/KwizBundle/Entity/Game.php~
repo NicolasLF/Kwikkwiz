@@ -5,12 +5,12 @@ namespace KZ\KwizBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Square
+ * Game
  *
- * @ORM\Table(name="square")
- * @ORM\Entity(repositoryClass="KZ\KwizBundle\Repository\SquareRepository")
+ * @ORM\Table(name="game")
+ * @ORM\Entity(repositoryClass="KZ\KwizBundle\Repository\GameRepository")
  */
-class Square
+class Game
 {
     /**
      * @var int
@@ -29,35 +29,11 @@ class Square
     private $party;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Type", type="string", length=255)
-     */
-    private $type;
-
-    /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="User")
      */
-    private $category;
-
-
-    /**
-     * @return int
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param int $category
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-    }
+    private $user;
 
 
     /**
@@ -71,11 +47,11 @@ class Square
     }
 
     /**
-     * Set board
+     * Set party
      *
      * @param integer $party
      *
-     * @return Square
+     * @return Game
      */
     public function setParty($party)
     {
@@ -95,26 +71,27 @@ class Square
     }
 
     /**
-     * Set type
+     * Set user
      *
-     * @param string $type
+     * @param integer $user
      *
-     * @return Square
+     * @return Game
      */
-    public function setType($type)
+    public function setUser($user)
     {
-        $this->type = $type;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get user
      *
-     * @return string
+     * @return int
      */
-    public function getType()
+    public function getUser()
     {
-        return $this->type;
+        return $this->user;
     }
 }
+
