@@ -43,7 +43,11 @@ body{
 }
 
 .creaButton{
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.slider.fullscreen ul.indicators{
+    bottom:10px;
 }
 
 /********************** FIN STYLE PAGE WELCOME  *************************/
@@ -58,3 +62,27 @@ body{
 
 }
 /* END FORMULAIRES (pages login & register)---------------------------------------------------------------------------*/
+
+/********************** DEBUT STYLE PAGE JOINPARTY  *************************/
+
+.joinParty{
+    background-color: #212121;
+}
+
+.joinParty h1{
+    font-size:24px;
+    color : white;
+    text-align: center;
+}
+/********************** FIN STYLE PAGE JOINPARTY  *************************/
+
+
+/********************** DEBUT STYLE NAV *************************/
+.nav{
+    height:100px;
+}
+
+.side-nav{
+    background-color: #ee6e73;
+}
+/********************** FIN STYLE NAV *************************/
