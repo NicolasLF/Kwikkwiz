@@ -103,8 +103,11 @@ class GameController extends Controller
         return $this->render('KZKwizBundle:Game:game.html.twig', ['board'=>$board]);
     }
 
-    public function endAction($square, $idParty)
+    public function endAction(Party $party)
     {
+
+        $square = $this->playerPositionAction($party, $this->getUser()->getId());
+
         if (41 == $square){
 
             $em = $this->getDoctrine()->getManager();
