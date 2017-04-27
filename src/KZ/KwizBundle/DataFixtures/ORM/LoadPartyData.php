@@ -61,6 +61,7 @@ class LoadPartyData extends AbstractFixture implements FixtureInterface, Ordered
             $sql->setLevel($item['level']);
             $sql->setMode($item['mode']);
             $sql->setNbPlayer($item['nbPlayer']);
+            $sql->setFull($item['full']);
             $this->addReference('party'.$i++, $sql);
             $manager->persist($sql);
             $manager->flush();
