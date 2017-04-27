@@ -11,9 +11,10 @@ namespace KZ\KwizBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\Answer;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-
-class LoadAnswerData implements FixtureInterface
+class LoadAnswerData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -379,14 +380,22 @@ class LoadAnswerData implements FixtureInterface
                 'correct' => 0,
             ),
         );
+        $i = 0;
         foreach ($data as $item){
             $sql = new Answer();
             $sql->setAnswer($item['answer']);
-            $sql->setQuestion($item['question']);
+            $sql->setQuestion($this->getReference('question'.$i));
             $sql->setCorrect($item['correct']);
             $manager->persist($sql);
             $manager->flush();
+            $i++;
         }
         $manager->flush();
+    }
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 2;
     }
 }
