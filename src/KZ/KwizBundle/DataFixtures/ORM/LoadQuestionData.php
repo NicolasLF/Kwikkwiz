@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\Question;
 
 
-class LoadQuestionData
+class LoadQuestionData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
