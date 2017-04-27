@@ -49,7 +49,7 @@ class LoadPartyData extends AbstractFixture implements FixtureInterface, Ordered
                 'nbPlayer' => 1
             ),
         );
-        $i = 0;
+        $i = 1;
         foreach ($data as $item){
             $sql = new Party();
             $sql->setName($item['name']);
@@ -67,6 +67,6 @@ class LoadPartyData extends AbstractFixture implements FixtureInterface, Ordered
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 1;
+        return 5;
     }
 }

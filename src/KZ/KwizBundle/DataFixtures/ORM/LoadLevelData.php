@@ -32,7 +32,7 @@ class LoadLevelData extends AbstractFixture implements FixtureInterface, Ordered
                 'color' => 'black'
             ),
         );
-        $i = 0;
+        $i = 1;
         foreach ($data as $item){
             $sql = new Level();
             $sql->setName($item['name']);
@@ -48,6 +48,6 @@ class LoadLevelData extends AbstractFixture implements FixtureInterface, Ordered
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 1;
+        return 2;
     }
 }

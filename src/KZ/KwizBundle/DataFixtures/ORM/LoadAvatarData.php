@@ -32,13 +32,14 @@ class LoadAvatarData extends AbstractFixture implements FixtureInterface, Ordere
                 'img' => 'avatar4.png',
             ),
         );
-        $i = 0;
+        $i = 1;
         foreach ($data as $item) {
             $sql = new Avatar();
             $sql->setImg($item['img']);
-            $this->addReference('avatar' . $i++, $sql);
             $manager->persist($sql);
             $manager->flush();
+            $this->addReference('avatar' . $i, $sql);
+            $i++;
         }
     }
 

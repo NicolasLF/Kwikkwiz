@@ -4,12 +4,13 @@ namespace KZ\UserBundle\DataFixtures\ORM;
 
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUserData extends AbstractFixture implements ContainerAwareInterface
+class LoadUserData extends AbstractFixture implements ContainerAwareInterface, FixtureInterface, OrderedFixtureInterface
 {
 
     /**
@@ -51,7 +52,7 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
                 'pass' => 'admin',
             )
         );
-        $i = 0;
+        $i = 1;
         foreach ($data as $item) {
             $user = $userManager->createUser();
             $user->setEmail($item['email']);
@@ -60,8 +61,9 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
             $user->setPlainPassword('pass');
             $user->setEnabled(true);
             $user->addRole('ROLE_AS');
-            $this->addReference('user'. $i++, $user);
             $userManager->updateUser($user);
+            $this->addReference('user'. $i, $user);
+            $i++;
         }
 
     }
@@ -73,5 +75,12 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
+    }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 4;
     }
 }

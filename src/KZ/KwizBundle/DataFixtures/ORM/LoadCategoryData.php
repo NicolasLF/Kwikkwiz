@@ -51,7 +51,7 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface, Orde
                 'icon' => '',
             ),
         );
-        $i = 0;
+        $i = 1;
         foreach ($data as $item){
             $sql = new Category();
             $sql->setName($item['name']);
@@ -67,6 +67,6 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface, Orde
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 1;
+        return 3;
     }
 }

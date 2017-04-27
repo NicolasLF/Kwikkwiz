@@ -126,10 +126,10 @@ class LoadQuestionData extends AbstractFixture implements OrderedFixtureInterfac
                 'type' => "text",
                 'content' => "Question 18",
                 'level' => $this->getReference('level3'),
-                'category' => $this->getReference('category16'),
+                'category' => $this->getReference('category6'),
             ),
         );
-        $i=0;
+        $i=1;
         foreach ($data as $item){
             $sql = new Question();
             $sql->setType($item['type']);
@@ -146,6 +146,6 @@ class LoadQuestionData extends AbstractFixture implements OrderedFixtureInterfac
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 1;
+        return 8;
     }
 }

@@ -21,370 +21,370 @@ class LoadAnswerData extends AbstractFixture implements OrderedFixtureInterface
         $data = array(
             array(
                 'answer' => "Answer 1",
-                'question' => 1,
+                'question' => $this->getReference('question1'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 2",
-                'question' => 1,
+                'question' => $this->getReference('question1'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 3",
-                'question' => 1,
+                'question' => $this->getReference('question1'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 4",
-                'question' => 1,
+                'question' => $this->getReference('question1'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 5",
-                'question' => 2,
+                'question' => $this->getReference('question2'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 6",
-                'question' => 2,
+                'question' => $this->getReference('question2'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 7",
-                'question' => 2,
+                'question' => $this->getReference('question2'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 8",
-                'question' => 2,
+                'question' => $this->getReference('question2'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 9",
-                'question' => 3,
+                'question' => $this->getReference('question3'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 10",
-                'question' => 3,
+                'question' => $this->getReference('question3'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 11",
-                'question' => 3,
+                'question' => $this->getReference('question3'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 12",
-                'question' => 3,
+                'question' => $this->getReference('question3'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 13",
-                'question' => 4,
+                'question' => $this->getReference('question4'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 14",
-                'question' => 4,
+                'question' => $this->getReference('question4'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 15",
-                'question' => 4,
+                'question' => $this->getReference('question4'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 16",
-                'question' => 4,
+                'question' => $this->getReference('question4'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 17",
-                'question' => 5,
+                'question' => $this->getReference('question5'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 18",
-                'question' => 5,
+                'question' => $this->getReference('question5'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 19",
-                'question' => 5,
+                'question' => $this->getReference('question5'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 20",
-                'question' => 5,
+                'question' => $this->getReference('question5'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 21",
-                'question' => 6,
+                'question' => $this->getReference('question6'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 22",
-                'question' => 6,
+                'question' => $this->getReference('question6'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 23",
-                'question' => 6,
+                'question' => $this->getReference('question6'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 24",
-                'question' => 6,
+                'question' => $this->getReference('question6'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 25",
-                'question' => 7,
+                'question' => $this->getReference('question7'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 26",
-                'question' => 7,
+                'question' => $this->getReference('question7'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 27",
-                'question' => 7,
+                'question' => $this->getReference('question7'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 28",
-                'question' => 7,
+                'question' => $this->getReference('question7'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 29",
-                'question' => 8,
+                'question' => $this->getReference('question8'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 30",
-                'question' => 8,
+                'question' => $this->getReference('question8'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 31",
-                'question' => 8,
+                'question' => $this->getReference('question8'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 32",
-                'question' => 8,
+                'question' => $this->getReference('question8'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 33",
-                'question' => 9,
+                'question' => $this->getReference('question9'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 34",
-                'question' => 9,
+                'question' => $this->getReference('question9'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 35",
-                'question' => 9,
+                'question' => $this->getReference('question9'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 36",
-                'question' => 9,
+                'question' => $this->getReference('question9'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 37",
-                'question' => 10,
+                'question' => $this->getReference('question10'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 38",
-                'question' => 10,
+                'question' => $this->getReference('question10'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 39",
-                'question' => 10,
+                'question' => $this->getReference('question10'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 40",
-                'question' => 10,
+                'question' => $this->getReference('question10'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 41",
-                'question' => 11,
+                'question' => $this->getReference('question11'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 42",
-                'question' => 11,
+                'question' => $this->getReference('question11'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 43",
-                'question' => 11,
+                'question' => $this->getReference('question11'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 44",
-                'question' => 11,
+                'question' => $this->getReference('question11'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 45",
-                'question' => 12,
+                'question' => $this->getReference('question12'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 46",
-                'question' => 12,
+                'question' => $this->getReference('question12'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 47",
-                'question' => 12,
+                'question' => $this->getReference('question12'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 48",
-                'question' => 12,
+                'question' => $this->getReference('question12'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 49",
-                'question' => 13,
+                'question' => $this->getReference('question13'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 50",
-                'question' => 13,
+                'question' => $this->getReference('question13'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 51",
-                'question' => 13,
+                'question' => $this->getReference('question13'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 52",
-                'question' => 13,
+                'question' => $this->getReference('question13'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 53",
-                'question' => 14,
+                'question' => $this->getReference('question14'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 54",
-                'question' => 14,
+                'question' => $this->getReference('question14'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 55",
-                'question' => 14,
+                'question' => $this->getReference('question14'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 56",
-                'question' => 14,
+                'question' => $this->getReference('question14'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 57",
-                'question' => 15,
+                'question' => $this->getReference('question15'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 58",
-                'question' => 15,
+                'question' => $this->getReference('question15'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 59",
-                'question' => 15,
+                'question' => $this->getReference('question15'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 60",
-                'question' => 15,
+                'question' => $this->getReference('question15'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 61",
-                'question' => 16,
+                'question' => $this->getReference('question16'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 62",
-                'question' => 16,
+                'question' => $this->getReference('question16'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 63",
-                'question' => 16,
+                'question' => $this->getReference('question16'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 64",
-                'question' => 16,
+                'question' => $this->getReference('question16'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 65",
-                'question' => 17,
+                'question' => $this->getReference('question17'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 66",
-                'question' => 17,
+                'question' => $this->getReference('question17'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 67",
-                'question' => 17,
+                'question' => $this->getReference('question17'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 68",
-                'question' => 17,
+                'question' => $this->getReference('question17'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 69",
-                'question' => 18,
+                'question' => $this->getReference('question18'),
                 'correct' => 1,
             ),
             array(
                 'answer' => "Answer 70",
-                'question' => 18,
+                'question' => $this->getReference('question18'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 71",
-                'question' => 18,
+                'question' => $this->getReference('question18'),
                 'correct' => 0,
             ),
             array(
                 'answer' => "Answer 72",
-                'question' => 18,
+                'question' => $this->getReference('question18'),
                 'correct' => 0,
             ),
         );
-        $i = 0;
+        $i = 1;
         foreach ($data as $item){
             $sql = new Answer();
             $sql->setAnswer($item['answer']);
-            $sql->setQuestion($this->getReference('question'.$i));
+            $sql->setQuestion($item['question']);
             $sql->setCorrect($item['correct']);
             $manager->persist($sql);
             $manager->flush();
@@ -396,6 +396,6 @@ class LoadAnswerData extends AbstractFixture implements OrderedFixtureInterface
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 2;
+        return 9;
     }
 }
