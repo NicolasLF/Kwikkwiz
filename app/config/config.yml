@@ -78,4 +78,4 @@ fos_user:
         sender_name: "No Reply"
     registration:
         form:
-            name: app_user_registration
+            type: KZ\UserBundle\Form\RegistrationType
