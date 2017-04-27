@@ -21,18 +21,18 @@ class PartyController extends Controller
         $party = $em->getRepository('KZKwizBundle:Party')->find($id);
         return $party;
     }
-    public function getPartiesActive($active)
+    public function getPartiesActive($active, $full)
     {
-        $parties = $em->getRepository('KZKwizBundle:Party')->findBy(['active'=>$active]);
+        $parties = $em->getRepository('KZKwizBundle:Party')->findBy(['active'=>$active, 'full'=>$full]);
         return $parties;
     }
     public function indexAction($id)
     {
         if($id>0){
             $party = $this->getParty($id);
-
+            
         }
-        $parties = $this->getPartiesActive(1);
+        $parties = $this->getPartiesActive(1, 0);
         return $this->render('KZKwizBundle:Party:joinParty.html.twig', ['parties'=>$parties]);
     }
 }
