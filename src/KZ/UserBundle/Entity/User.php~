@@ -34,6 +34,7 @@ class User extends BaseUser
      * Set avatar
      *
      * @param \KZ\KwizBundle\Entity\Avatar $avatar
+     *
      * @return User
      */
     public function setAvatar(\KZ\KwizBundle\Entity\Avatar $avatar = null)
