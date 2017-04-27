@@ -21,9 +21,9 @@ class PartyType extends AbstractType
             ->add('mode', ChoiceType::class, array(
                 'expanded' => true,
                 'choices' => array(
-                    1 => 'Plateau',
-                    2 => 'Mort Subite',
-                    3 => 'Chrono'
+                    'Plateau' => 1,
+                    'Mort Subite' => 2,
+                    'Chrono' => 3
                 ),
                 'data' => 'Plateau'
             ))

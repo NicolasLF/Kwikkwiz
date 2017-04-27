@@ -3,7 +3,7 @@ kz_kwiz_homepage:
     defaults: { _controller: KZKwizBundle:Default:index }
 
 kz_kwiz_new_game:
-    path:     /new_game
+    path:     /newGame
     defaults: { _controller: KZKwizBundle:Party:new}
 
 kz_kwiz_joinParty:
@@ -13,3 +13,9 @@ kz_kwiz_joinParty:
 kz_kwiz_game:
     path:     /game/{id}
     defaults: { _controller: KZKwizBundle:Game:index }
+
+kz_kwiz_test:
+    path:     /test/{party}/{id}
+    defaults: { _controller: KZKwizBundle:Game:playerPosition }
+
+

@@ -5,12 +5,12 @@ namespace KZ\KwizBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Party
+ * Position
  *
- * @ORM\Table(name="game")
- * @ORM\Entity(repositoryClass="KZ\KwizBundle\Repository\GameRepository")
+ * @ORM\Table(name="position")
+ * @ORM\Entity(repositoryClass="KZ\KwizBundle\Repository\PositionRepository")
  */
-class Game
+class Position
 {
     /**
      * @var int
@@ -22,16 +22,7 @@ class Game
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\ManyToOne(targetEntity="Party")
-     */
-    private $party;
-
-    /**
-     * @var int
-     *
-     * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User")
      */
     private $user;
 
@@ -39,7 +30,6 @@ class Game
      * @ORM\ManyToOne(targetEntity="KZ\KwizBundle\Entity\Square")
      */
     private $square;
-
 
 
     /**
@@ -53,51 +43,17 @@ class Game
     }
 
     /**
-     * Set party
-     *
-     * @param integer $party
-     *
-     * @return Game
-     */
-    public function setParty($party)
-    {
-        $this->party = $party;
-
-        return $this;
-    }
-
-    /**
-     * Get party
-     *
-     * @return int
-     */
-    public function getParty()
-    {
-        return $this->party;
-    }
-
-    /**
      * Set user
      *
-     * @param integer $user
+     * @param \KZ\UserBundle\Entity\User $user
      *
-     * @return Game
+     * @return Position
      */
-    public function setUser($user)
+    public function setUser(\KZ\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
         return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return int
-     */
-    public function getUsera()
-    {
-        return $this->user;
     }
 
     /**
@@ -113,9 +69,9 @@ class Game
     /**
      * Set square
      *
-     * @param \KZ\KwizBundle\Entity\Square $square
+     * @param \KZ\UserBundle\Entity\User $square
      *
-     * @return Game
+     * @return Position
      */
     public function setSquare(\KZ\KwizBundle\Entity\Square $square = null)
     {
