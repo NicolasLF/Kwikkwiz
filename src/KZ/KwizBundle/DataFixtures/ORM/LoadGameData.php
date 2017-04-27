@@ -8,55 +8,57 @@
 
 namespace KZ\KwizBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use KZ\KwizBundle\Entity\Game;
 
 
-class LoadGameData implements FixtureInterface
+class LoadGameData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
         $data = array(
             array(
-                'party' => 1,
-                'user' => 1
+                'party' => $this->getReference('party1'),
+                'user' => $this->getReference('user1'),
             ),
             array(
-                'party' => 1,
-                'user' => 2
+                'party' => $this->getReference('party1'),
+                'user' => $this->getReference('user1'),
             ),
             array(
-                'party' => 1,
-                'user' => 3
+                'party' => $this->getReference('party1'),
+                'user' => $this->getReference('user2'),
             ),
             array(
-                'party' => 1,
-                'user' => 4
+                'party' => $this->getReference('party1'),
+                'user' => $this->getReference('user2'),
             ),
             array(
-                'party' => 2,
-                'user' => 1
+                'party' => $this->getReference('party2'),
+                'user' => $this->getReference('user1'),
             ),
             array(
-                'party' => 2,
-                'user' => 2
+                'party' => $this->getReference('party2'),
+                'user' => $this->getReference('user2'),
             ),
             array(
-                'party' => 2,
-                'user' => 3
+                'party' => $this->getReference('party2'),
+                'user' => $this->getReference('user3'),
             ),
             array(
-                'party' => 3,
-                'user' => 1
+                'party' => $this->getReference('party3'),
+                'user' => $this->getReference('user1'),
             ),
             array(
-                'party' => 3,
-                'user' => 2
+                'party' => $this->getReference('party3'),
+                'user' => $this->getReference('user2'),
             ),
             array(
-                'party' => 4,
-                'user' => 1
+                'party' => $this->getReference('party4'),
+                'user' => $this->getReference('user1'),
             ),
         );
         foreach ($data as $item){
@@ -67,5 +69,11 @@ class LoadGameData implements FixtureInterface
             $manager->flush();
         }
         $manager->flush();
+    }
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 1;
     }
 }

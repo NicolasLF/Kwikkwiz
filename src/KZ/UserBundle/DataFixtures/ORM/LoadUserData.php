@@ -29,36 +29,38 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
             array(
                 'email' => 'admin@admin.com',
                 'username' => 'admin1',
-                'avatar' => 'avatar1.png',
+                'avatar' => $this->getReference('avatar1'),
                 'pass' => 'admin',
             ),
             array(
                 'email' => 'admin1@admin.com',
                 'username' => 'admin2',
-                'avatar' => 'avatar2.png',
+                'avatar' => $this->getReference('avatar2'),
                 'pass' => 'admin',
             ),
             array(
                 'email' => 'admin2@admin.com',
                 'username' => 'admin3',
-                'avatar' => 'avatar3.png',
+                'avatar' => $this->getReference('avatar3'),
                 'pass' => 'admin',
             ),
             array(
                 'email' => 'admin3@admin.com',
                 'username' => 'admin4',
-                'avatar' => 'avatar4.png',
+                'avatar' => $this->getReference('avatar4'),
                 'pass' => 'admin',
             )
         );
+        $i = 0;
         foreach ($data as $item) {
             $user = $userManager->createUser();
             $user->setEmail($item['email']);
             $user->setUsername($item['username']);
+            $user->setAvatar($item['avatar']);
             $user->setPlainPassword('pass');
             $user->setEnabled(true);
             $user->addRole('ROLE_AS');
-            $this->addReference('user-admin', $user);
+            $this->addReference('user'. $i++, $user);
             $userManager->updateUser($user);
         }
 
