@@ -10,7 +10,7 @@ nav{
 }
 
 .card{
-    background-color: rgba(255,255,255,0.8) !important;
+    background-color: rgba(255,255,255,0.5) !important;
     color: white;
 }
 .card .card-image{
@@ -30,7 +30,7 @@ nav{
 }
 
 .card .card-content{
-    height: 500px;
+    height: 300px;
     margin-right: auto;
     margin-left: auto;
     display: block;
