@@ -1,0 +1,41 @@
+{% extends 'layout_admin.html.twig' %}
+
+{% block content %}
+    <h1>Answers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Answer</th>
+                <th>Correct</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for answer in answers %}
+            <tr>
+                <td><a href="{{ path('admin_answer_show', { 'id': answer.id }) }}">{{ answer.id }}</a></td>
+                <td>{{ answer.answer }}</td>
+                <td>{{ answer.correct }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_answer_show', { 'id': answer.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_answer_edit', { 'id': answer.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_answer_new') }}">Create a new answer</a>
+        </li>
+    </ul>
+{% endblock %}

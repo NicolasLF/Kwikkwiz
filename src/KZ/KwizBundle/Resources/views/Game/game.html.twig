@@ -1,3 +1,11 @@
+{% extends 'base.html.twig' %}
+
 {% block body %}
-<h1>Jeu</h1>
+    {% if isTurn==0 %}
+        <h1>Attente de votre tour</h1>
+    {% elseif isTurn==1 %}
+        <h1>Jeu</h1>
+    {% else %}
+        <h1>Fin de partie</h1>
+    {% endif %}
 {% endblock %}
