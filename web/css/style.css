@@ -119,6 +119,10 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
 .paddingTop {
     padding-top: 25px;
 }
+
+.paddingBottom {
+    padding-bottom: 30px;
+}
 /* END FORMULAIRES (pages login & register)---------------------------------------------------------------------------*/
 
 /********************** DEBUT STYLE PAGE JOINPARTY  *************************/
@@ -184,3 +188,7 @@ nav{
     border:1px solid white;
 }
 /********************** FIN STYLE NAV *************************/
+
+select {
+    display: inherit;
+}
