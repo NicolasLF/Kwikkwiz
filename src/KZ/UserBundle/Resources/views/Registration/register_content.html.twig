@@ -11,8 +11,8 @@
     </header>
 
     <!--Register Form-->
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register', 'id': 'registration_form'}}) }}
-<div class="form-group" id="fos_user_registration_form">
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register', 'id': 'registration_form'}}) }}
+    <div class="form-group" id="fos_user_registration_form">
     <div class="row">
         <div class="col s6 offset-s3 ">
             <label for="username" class="sr-only formLabel">Pseudo</label>
@@ -42,20 +42,22 @@
         </div>
     </div>
     <div class="row">
-        <div class="col s6 offset-s3 ">
+        <div class="col s6 offset-s3">
             <label for="username" class="sr-only formLabel">Choisir un avatar</label>
-            {{ form_widget(form.Avatar, { 'attr': {'class': 'form-control input-group', 'placeholder': 'Avatar'|trans } }) }}git
+            {{ form_widget(form.Avatar, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Avatar'|trans } }) }}
             {{ form_errors(form.Avatar) }}
         </div>
     </div>
 
-</div>
-<div class="row">
-    <div class="col s6 offset-s3 ">
-        <button type="submit" class="btn btn-primary" value="{{ 'registration.submit'|trans }}">Enregistrer</button>
-        <p><a href="#">Déjà membre ?</a></p>
+    <div class="row">
+        <div class="form-group col s6 offset-s3">
+            <button type="submit" class="btn btn-btn teal accent-2" value="{{ 'registration.submit'|trans }}">
+                Enregistrer
+            </button>
+            <p><a href="#">Déjà membre ?</a></p>
+        </div>
     </div>
-</div>
-{{ form_end(form) }}
-<!--Register Form Ends-->
+
+    {{ form_end(form) }}
+    <!--Register Form Ends-->
 {% endblock body %}
