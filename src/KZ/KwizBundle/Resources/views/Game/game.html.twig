@@ -2,7 +2,9 @@
 
 {% block body %}
     {% if isTurn==0 %}
-        <h1>Attente de votre tour</h1>
+        <div class="center-align">
+            <h1 class="center-align">Attendez votre tour</h1>
+        </div>
     {% elseif isTurn==1 %}
 
 
@@ -99,9 +101,13 @@
 
         {% endif %}
     {% elseif isTurn==-1 %}
-        <h1>Fin de partie</h1>
+        <div class="center-align">
+            <h1>Fin de la partie</h1>
+        </div>
     {% else %}
-        <h1>Attente de début</h1>
+        <div class="center-align">
+            <h1>Attendez le début de la partie</h1>
+        </div>
     {% endif %}
     {% block javascripts %}
         <script>

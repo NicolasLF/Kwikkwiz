@@ -104,7 +104,6 @@ class GameController extends Controller
                 'user' => $user
             ));
 
-
         $square = $game[0]->getSquare();
         return $square;
     }
