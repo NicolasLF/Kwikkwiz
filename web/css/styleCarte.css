@@ -1,0 +1,42 @@
+body{
+    background-color: black;
+}
+
+nav{
+    box-shadow: none;
+    background-color: inherit;
+    height: 40px;
+    margin-bottom: 100px;
+}
+
+.card{
+    background-color: rgba(255,255,255,0.8) !important;
+    color: white;
+}
+.card .card-image{
+    width: 100%;
+}
+
+.card-title{
+    color: white;
+    background-color: #66FFCC;
+    width:400px;
+}
+
+.card-action div{
+    background-color: white;
+    margin: 1px;
+
+}
+
+.card .card-content{
+    height: 500px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+
+}
+
+.card-content h3 {
+    color: black !important;
+}

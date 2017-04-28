@@ -91,9 +91,9 @@ class GameController extends Controller
         );
         return $category;
     }
-    public function verifAnswer(Answer $answer)
+    public function verifAnswerAction(Answer $answer)
     {
-
+        
     }
     public function indexAction(Party $party)
     {

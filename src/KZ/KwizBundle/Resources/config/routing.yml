@@ -23,5 +23,10 @@ kz_kwiz_endGame:
     defaults: { _controller: KZKwizBundle:Game:history }
 
 kz_kwiz_verif:
-    path:     /game/history/{id}
+    path:     /game/verifAnswer/{id}
     defaults: { _controller: KZKwizBundle:Game:verifAnswer }
+
+kz_kwiz_carte:
+    path:     /carte
+    defaults: { _controller: KZKwizBundle:Carte:index }
+
