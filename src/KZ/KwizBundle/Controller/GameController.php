@@ -36,9 +36,11 @@ class GameController extends Controller
         foreach ($games as $game) {
             $em = $this->getDoctrine()->getManager();
             $game->getUser()->getId();
-            $game = $em->getRepository('KZKwizBundle:Game')->find($game->getId());
-            $game->setSquare($square);
-            $em->flush();
+            if($game->getSquare()==NULL){
+                $game = $em->getRepository('KZKwizBundle:Game')->find($game->getId());
+                $game->setSquare($square);
+                $em->flush();
+            }
         }
         return true;
     }
@@ -94,12 +96,25 @@ class GameController extends Controller
     public function verifAnswerAction(Answer $answer, Party $party)
     {
        $status = $answer->getCorrect();
+        $question = $this->getOneQuestion();
+        $answers = $this->getOneAnswer($question);
+        $board = $this->getBoard($party);
+
        if($status==1) {
            $this->turn($party);
+           $isTurn = $this->isTurn($party);
+           if($isTurn==-1){
+              return $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party->getId()));
+           }
+           return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'answers'=>$answers, 'party'=>$party]);
        }
        else{
-               $this->setTurns($party);
+           $this->setTurns($party);
+           $isTurn = $this->isTurn($party);
+          return $this->redirectToRoute('kz_kwiz_game', array('id'=>$party->getId()));
+
        }
+
     }
     public function indexAction(Party $party)
     {
@@ -109,10 +124,7 @@ class GameController extends Controller
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
-            var_dump($isTurn);
-            if ($this->startGame($party)) {
-                $this->setTurns($party);
-            }
+            $this->startGame($party);
         }else {
             $isTurn = 2;
         }
@@ -285,7 +297,7 @@ class GameController extends Controller
         } else if ($square->getCategory() == 'A') {
             $this->randomAction($party);
         }
-
+        return true;
     }
 
     public function bonusAction($party)
