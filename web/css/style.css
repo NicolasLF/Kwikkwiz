@@ -30,8 +30,8 @@ body{
 
 /********************** DEBUT STYLE PAGE WELCOME  *************************/
 .logoWelcome{
-    max-width: 50% !important;
-    max-height: 50% !important;
+    max-width: 80% !important;
+    max-height: 80% !important;
 }
 
 .slider .indicators .indicator-item{
@@ -192,4 +192,8 @@ nav{
 
 select {
     display: inherit;
+}
+
+.largeurBt {
+    width: 180px;
 }
