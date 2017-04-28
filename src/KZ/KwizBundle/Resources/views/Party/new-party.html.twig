@@ -3,93 +3,94 @@
 {% block title %}KwikKwiz | Crée une partie{% endblock %}
 
 {% block body %}
-    <header>
-        <nav>
-            <div class="nav-wrapper ">
-                <div class="row">
-                    <div class="col s1 m1 l1">
-                <a href="#" data-activates="mobile-demo" class="button-collapse ">
-                    <i class="material-icons iconeNoire paddingTop2">account_circle</i>
-                </a>
-                </div>
+    <div class="hide-on-med-and-up">
+        <header>
+            <nav>
+                <div class="nav-wrapper ">
+                    <div class="row">
+                        <div class="col s1 m1 l1">
+                            <a href="#" data-activates="mobile-demo" class="button-collapse ">
+                                <i class="material-icons iconeNoire paddingTop2">account_circle</i>
+                            </a>
+                        </div>
 
 
-                    <div class=" col s4 m4 l2 offset-s3 offset-m3 offset-l4">
-                        <a href="/"> <img class="formBrandLogo paddingTop"
-                                          src="{{ asset('img/kwikkwizLogoLineWhite.png') }}">
-                        </a>
+                        <div class=" col s4 m4 l2 offset-s3 offset-m3 offset-l4">
+                            <a href="/"> <img class="formBrandLogo paddingTop"
+                                              src="{{ asset('img/kwikkwizLogoLineWhite.png') }}">
+                            </a>
+                        </div>
+
                     </div>
 
+
+                    <ul class="side-nav" id="mobile-demo">
+                        <li><img class="avatarNav" src="{{ asset('img/avatar3.png') }}"></li>
+                        <li><h3>Pseudo</h3></li>
+                        <hr class="hrNav"/>
+                        <li><a href="#"><i class="material-icons">history</i>Historique</a></li>
+                        <li><a href="/newGame"><i class="material-icons">add_circle</i>Créer une partie</a></li>
+                        <li><a href="/joinParty"><i class="material-icons">input</i>Rejoindre une partie</a></li>
+                        <li><a href="/"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container-fluid joinParty">
+
+            <div class="row">
+                <div class="col s12">
+                    <h1>CRÉATION D'UNE PARTIE</h1>
                 </div>
 
+                <div class="form-group" id="fos_user_registration_form">
+                    <div class="row">
+                        <div class="col s6 offset-s3">
+                            {{ form_start(form) }}
+                        </div>
+                    </div>
 
-                <ul class="side-nav" id="mobile-demo">
-                    <li><img class="avatarNav" src="{{ asset('img/avatar3.png') }}"></li>
-                    <li><h3>Pseudo</h3></li>
-                    <hr class="hrNav"/>
-                    <li><a href="#"><i class="material-icons">history</i>Historique</a></li>
-                    <li><a href="/newGame"><i class="material-icons">add_circle</i>Créer une partie</a></li>
-                    <li><a href="/joinParty"><i class="material-icons">input</i>Rejoindre une partie</a></li>
-                    <li><a href="/"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
-                </ul>
+                    <div class="row">
+                        <div class="col s6 offset-s3">
+                            <label class="formLabel">Nom de la partie</label>
+                            {{ form_widget(form.name, { 'attr': {'class': 'form-control input-group', 'placeholder': 'Nom de la partie'|trans } }) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s6 offset-s3">
+                            <label class="formLabel">Mode de jeux</label>
+                            {{ form_widget(form.mode) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s6 offset-s3">
+                            <label class="formLabel">Nombre de joueurs</label>
+                            {{ form_widget(form.nbPlayer) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s6 offset-s3">
+                            <label class="formLabel">Niveau de difficulté</label>
+                            {{ form_widget(form.level) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s6 offset-s3 paddingBottom">
+                            <button type="submit" class="btn teal accent-2" value="Create">Créer</button>
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+
             </div>
-        </nav>
-    </header>
-
-    <div class="container-fluid joinParty">
-
-        <div class="row">
-            <div class="col s12">
-                <h1>CRÉATION D'UNE PARTIE</h1>
-            </div>
-
-            <div class="form-group" id="fos_user_registration_form">
-                <div class="row">
-                    <div class="col s6 offset-s3">
-                        {{ form_start(form) }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s6 offset-s3">
-                        <label class="formLabel">Nom de la partie</label>
-                        {{ form_widget(form.name, { 'attr': {'class': 'form-control input-group', 'placeholder': 'Nom de la partie'|trans } }) }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s6 offset-s3">
-                        <label class="formLabel">Mode de jeux</label>
-                        {{ form_widget(form.mode) }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s6 offset-s3">
-                        <label class="formLabel">Nombre de joueurs</label>
-                        {{ form_widget(form.nbPlayer) }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s6 offset-s3">
-                        <label class="formLabel">Niveau de difficulté</label>
-                        {{ form_widget(form.level) }}
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s6 offset-s3 paddingBottom">
-                        <button type="submit" class="btn teal accent-2" value="Create">Créer</button>
-                    </div>
-                </div>
-            </div>
-            {{ form_end(form) }}
-
         </div>
     </div>
-    </div>
-    </div>
+
     {% block javascripts %}
         <script>
             $(document).ready(function () {
