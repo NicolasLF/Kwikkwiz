@@ -64,7 +64,38 @@
                     </div>
                 </div>
             </div>
+
         {% else %}
+
+            <div class="row">
+                <div class="col s10 offset-s1 marginBottom">
+                    <div class=" z-depth-4 carteFond">
+
+                        <div class="card-title center-align"
+                             style="background-color: {{ question.category.color }}">
+                            <h5>{{ card.type }}</h5>
+                        </div>
+
+                        <div class="center-align card-content">
+                            <h3>{{ alert }}</h3>
+                            <img class="questionImg" src="{{ asset('img/avatar4.png') }}">
+                        </div>
+
+                        <div class="reponses">
+                            {#{% for answer in answers %}#}
+                                {#<div class="center-align btnReponse">#}
+                                    {#<a style="background-color: {{ question.category.color }}"#}
+                                       {#class="btn waves-effect btn teal accent-2 white-text darken-text-2"#}
+                                       {#href="{{ path('kz_kwiz_verif', {'id': answer.id,'party': party.id}) }}">{{ answer.answer }}</a>#}
+                                {#</div>#}
+                            {#{% endfor %}#}
+                            {% if card.question is not defined and party.id is defined %}
+                            <a class="btn btn-primary" href="{{ path('kz_kwiz_game', {'id': party.id}) }}">OK</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         {% endif %}
     {% elseif isTurn==-1 %}

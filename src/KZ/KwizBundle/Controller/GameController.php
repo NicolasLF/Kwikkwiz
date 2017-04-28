@@ -107,8 +107,6 @@ class GameController extends Controller
 
         $square = $game[0]->getSquare();
         return $square;
-
-
     }
     public function getMyPosition(Party $party)
     {
@@ -126,6 +124,21 @@ class GameController extends Controller
         $status = $answer->getCorrect();
         $board = $this->getBoard($party);
         $position = $this->getMyPosition($party);
+        $alert = '';
+        $card = $this->getOneCard($party);
+        if ($card->getType() == 'A'){
+            $alert = $this->randomAction($party);
+        } elseif ($card->getType() == 'B'){
+            $alert = $this->bonusAction($party);
+        } elseif ($card->getType() == 'P'){
+            $alert = $this->piegeAction($party);
+        } elseif ($card->getType() == 'M'){
+            $alert = $this->malusAction($party);
+        }
+        $question = $this->getOneQuestion($card->getCategory());
+        $position = $this->getMyPosition($party);
+        $answer = $this->getOneAnswer($question);
+
        if($status==1) {
            $this->turn($party);
            $card = $this->getOneCard($party);
@@ -133,7 +146,7 @@ class GameController extends Controller
            if($isTurn==-1){
               return $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party->getId()));
            }
-           return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answers, 'party'=>$party, 'position'=>$position]);
+           return $this->render('KZKwizBundle:Game:game.html.twig', ['alert' => $alert, 'board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
        }
        else{
            $this->setTurns($party);
@@ -151,7 +164,17 @@ class GameController extends Controller
             $isTurn = $this->isTurn($party);
             $this->startGame($party);
             // carte
+            $alert = '';
             $card = $this->getOneCard($party);
+            if ($card->getType() == 'A'){
+                $alert = $this->randomAction($party);
+            } elseif ($card->getType() == 'B'){
+                $alert = $this->bonusAction($party);
+            } elseif ($card->getType() == 'P'){
+                $alert = $this->piegeAction($party);
+            } elseif ($card->getType() == 'M'){
+                $alert = $this->malusAction($party);
+            }
             $question = $this->getOneQuestion($card->getCategory());
             $position = $this->getMyPosition($party);
             $answer = $this->getOneAnswer($question);
@@ -159,7 +182,7 @@ class GameController extends Controller
             if($isTurn!=1){
                 header("Refresh: 1");
             }
-            return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
+            return $this->render('KZKwizBundle:Game:game.html.twig', ['alert' => $alert, 'board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
         }else {
             $isTurn = 2;
         }
@@ -345,8 +368,6 @@ class GameController extends Controller
         $nbTurn = count($bonus);
         $key = rand(0, $nbTurn - 1);
 
-        var_dump($bonus[$key]);
-
         $em = $this->getDoctrine()->getManager();
 
         $party = $em->getRepository('KZKwizBundle:Party')->find($party);
@@ -415,8 +436,6 @@ class GameController extends Controller
         $nbTurn = count($malus);
         $key = rand(0, $nbTurn - 1);
 
-        var_dump($malus[$key]);
-
         $em = $this->getDoctrine()->getManager();
 
         $party = $em->getRepository('KZKwizBundle:Party')->find($party);
@@ -471,8 +490,6 @@ class GameController extends Controller
         );
         $nbTurn = count($piege);
         $key = rand(0, $nbTurn - 1);
-
-        var_dump($piege[$key]);
 
         $em = $this->getDoctrine()->getManager();
 
