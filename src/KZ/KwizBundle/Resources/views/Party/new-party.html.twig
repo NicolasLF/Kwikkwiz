@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block title %}KwikKwiz | Crée une partie{% endblock %}
 
@@ -36,7 +36,14 @@
                 <div class="form-group" id="fos_user_registration_form">
                     <div class="row">
                         {{ form_start(form) }}
-                        {{ form_widget(form) }}
+                        {{ form_widget(form.name) }}
+                        {{ form_widget(form.mode) }}
+                        <div class="input-field col s12">
+                        {{ form_widget(form.nbPlayer) }}
+                        </div>
+                        <div class="input-field col s12">
+                        {{ form_widget(form.level) }}
+                        </div>
                     </div>
                     <div class="row">
                         <button type="submit" class="btn teal accent-2" value="Create">Créer la partie</button>
