@@ -28,7 +28,6 @@ class History
     private $party;
 
     /**
-     * @var int
      *
      * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User")
      */
