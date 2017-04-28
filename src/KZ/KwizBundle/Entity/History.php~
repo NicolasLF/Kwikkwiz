@@ -22,16 +22,14 @@ class History
     private $id;
 
     /**
-     * @var int
      *
      * @ORM\ManyToOne(targetEntity="Party")
      */
     private $party;
 
     /**
-     * @var int
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User")
      */
     private $user;
 
@@ -125,4 +123,3 @@ class History
         return $this->rank;
     }
 }
-

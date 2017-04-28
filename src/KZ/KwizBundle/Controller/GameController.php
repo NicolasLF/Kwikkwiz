@@ -17,6 +17,8 @@ use KZ\KwizBundle\KZKwizBundle;
 
 use KZ\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class GameController extends Controller
 {
@@ -77,13 +79,10 @@ class GameController extends Controller
             $board[$i]['category'] = rand(0, 5);
         }
         //Génération des cases aléatoires
-        for ($i = 36; $i <= 38; $i++) {
+        for ($i = 36; $i <= 39; $i++) {
             $board[$i]['type'] = 'A';
             $board[$i]['category'] = rand(0, 5);
         }
-        //Génération de la prison
-        $board[39]['type'] = 'J';
-        $board[39]['category'] = rand(0, 5);
         shuffle($board);
         $board[39]['type'] = 'Q';
         $board[39]['category'] = rand(0, 5);
@@ -136,7 +135,26 @@ class GameController extends Controller
                 $this->setTurns($party);
             }
         }
-        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board]);
+        $isTurn = $this->isTurn($party);
+        if($isTurn==0){
+            header("Refresh: 1;url='/game/".$party->getId()."'");
+        }else if($isTurn==-1){
+
+        }
+        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn]);
+    }
+
+    public function historyAction(Party $party)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $history = $em->getRepository('KZKwizBundle:History')->findOneBy(
+            array(
+                'party' => $party,
+                'user' => $this->getUser()
+            )
+        );
+        dump($history);
+        return $this->render('KZKwizBundle:Game:end-game.html.twig', ['history' => $history, 'user'=>$this->getUser()]);
     }
 
     public function endAction(Party $party)
@@ -182,17 +200,6 @@ class GameController extends Controller
                 $em->remove($squareDel);
                 $em->flush();
             }
-            //Remplie la table history du User en cours
-            $history = new History();
-            $history->setUser($this->getUser());
-            $history->setParty($partyActive);
-            $history->setRank(1);
-
-            //Remplie la table history des autres Users
-            $game = new Game();
-            $games = $em->getRepository($game)->findBy(array(
-                'party_id' => $idParty,
-            ));
         }
     }
 
@@ -210,10 +217,10 @@ class GameController extends Controller
 
     }
 
-    public function getThisGame(Square $square)
+    public function getThisGame(Party $party)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('KZUserBundle:Square')->find($square);
+        $user = $em->getRepository('KZUserBundle:User')->find($party);
         $games = $em->getRepository('KZKwizBundle:Game')->findOneBy(
             array(
                 'party' => $party,
@@ -265,29 +272,44 @@ class GameController extends Controller
             }
         }
     }
-
+    public function isTurn (Party $party)
+    {
+        if($party->getActive()==0){
+            return -1;
+        }
+        $em = $this->getDoctrine()->getManager();
+        $status = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+            array(
+                'party' => $party,
+                'user' => $this->getUser()
+            )
+        );
+        return $status->getTurn();
+    }
     public function turn(Party $party)
     {
         $dice = rand(1, 6);
         $position = $this->playerPositionAction($party, $this->getUser()->getId());
         $square = $this->getThisSquare($party, $position);
         $turn = true;
+
         while ($turn == true) {
             if ($square->getCategory() == 'Q') {
                 //if true
                 $this->move($party, $this->getUser(), $dice);
             } else if ($square->getCategory() == ' B') {
-
+                $this->bonusAction($party);
             } else if ($square->getCategory() == 'M') {
-
+                $this->malusAction($party);
             } else if ($square->getCategory() == 'A') {
-
+                $this->piegeAction($party);
             } else if ($square->getCategory() == 'P') {
-
+                $this->randomAction($piege);
             } else if ($square->getCategory() == 'J') {
-
+                $this->prisonAction($piege);
             }
         }
+
         $this->setTurns($party);
     }
 
@@ -477,12 +499,8 @@ class GameController extends Controller
     public function prisonAction(Square $square)
     {
     }
-
-    public function jsToPhp($id, $query)
+    public function refreshAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $party = $em->getRepository('KZKwizBundle:Party')->find($id);
-        return $query($party);
+        return new JsonResponse('test');
     }
-
 }
