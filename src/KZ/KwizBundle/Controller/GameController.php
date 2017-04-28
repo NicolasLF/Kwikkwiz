@@ -131,7 +131,7 @@ class GameController extends Controller
                 $board = $this->generateBoard($party);
             }
             if($this->startGame($party)){
-                dump($this->turn($party));
+                $this->setTurns($party);
             }
         }
         return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board]);
@@ -240,9 +240,11 @@ class GameController extends Controller
         $em->flush();
         return $square;
     }
-    public function setTurns()
+    public function setTurns(Party $party)
     {
-
+        $games = $this->getGames($party);
+        dump($games);
+        die();
     }
     public function turn(Party $party)
     {
@@ -266,7 +268,7 @@ class GameController extends Controller
 
             }
         }
-        $this->setTurns();
+        $this->setTurns($party);
     }
 
     public function jsToPhp($id, $query)
