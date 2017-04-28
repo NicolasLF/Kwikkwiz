@@ -24,8 +24,8 @@
 
 
 body{
-        font-family: 'Nunito', sans-serif;
-    }
+    font-family: 'Nunito', sans-serif;
+}
 
 
 /********************** DEBUT STYLE PAGE WELCOME  *************************/
@@ -142,7 +142,7 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
 
 /********************** DEBUT STYLE NAV *************************/
 nav{
-    height:155px;
+    height: auto;
     background-color: #66FFCC ;
     box-shadow: none;
 }
@@ -165,7 +165,7 @@ nav{
 .side-nav li h3{
     font-size:20px;
     color: white;
-    font-family: 'Nunito_bold';
+    font-family: 'Nunito_bold', sans-serif;
     text-align: center;
 }
 
@@ -199,18 +199,44 @@ select {
 }
 
 
+.iconeNoire {
+    color: black;
+}
+
+.paddingTop2 {
+    padding-top: 5px;
+}
+
+
 
 /******************************* STYLE VERSION DESKTOP *******************************/
 
 .homePage {
-    width: 100%;
-    max-height: 100vh;
-    background-color: #00b8d4;
+    background-color: #66FFCC;
+    height: 100wh;
+    border-top: solid 50px #66FFCC;
 }
 
-.hero{
-    float: right;
-    height: 100%;
-    position: relative;
-    width: 50%;
+.hrWelcome {
+    background-color: #66FFCC;
+    margin: 0;
+    border: solid 1px white;
+}
+
+.marginBottom2 {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.marginTopFuckOff {
+    margin: 0;
+}
+
+.pasClasse {
+    color: white;
+}
+
+.moinsGros {
+    width: 30%;
+    height: 30%;
 }
