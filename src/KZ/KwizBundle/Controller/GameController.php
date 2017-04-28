@@ -132,7 +132,7 @@ class GameController extends Controller
             if ($board == NULL) {
                 $board = $this->generateBoard($party);
             }
-            if($this->startGame($party)){
+            if ($this->startGame($party)) {
                 $this->setTurns($party);
             }
         }
@@ -242,25 +242,26 @@ class GameController extends Controller
         $em->flush();
         return $square;
     }
+
     public function setTurns(Party $party)
     {
         $em = $this->getDoctrine()->getManager();
         $games = $this->getGames($party);
-        for($i=0;$i<count($games);$i++){
-            if($games[$i]->getTurn()==1){
+        for ($i = 0; $i < count($games); $i++) {
+            if ($games[$i]->getTurn() == 1) {
                 $games[$i]->setTurn(0);
                 $em->persist($games[$i]);
                 $em->flush();
-                if($i+1<count($games)){
-                    $games[$i+1]->setTurn(1);
-                    $em->persist($games[$i+1]);
+                if ($i + 1 < count($games)) {
+                    $games[$i + 1]->setTurn(1);
+                    $em->persist($games[$i + 1]);
                     $em->flush();
-                }else {
+                } else {
                     $games[0]->setTurn(1);
                     $em->persist($games[0]);
                     $em->flush();
                 }
-                $i=count($games);
+                $i = count($games);
             }
         }
     }
@@ -357,19 +358,120 @@ class GameController extends Controller
 
     }
 
-    public function malusAction(Square $square)
+    public function malusAction($party)
     {
+        $malus = array(
+            array(
+                'text' => 'Reculez de 3 cases',
+                'type' => 'case',
+                'for' => 'user',
+                'act' => -3,
+            ),
+            array(
+                'text' => 'Tout le monde avance d\'une case... Sauf vous!',
+                'type' => 'case',
+                'for' => 'users',
+                'act' => 1,
+            ),
+            array(
+                'text' => 'Inverser la position avec le dernier',
+                'type' => 'inverse',
+                'for' => 'Ouser',
+                'act' => 'inverse',
+            )
+        );
+        $nbTurn = count($malus);
+        $key = rand(0, $nbTurn - 1);
 
+        var_dump($malus[$key]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $party = $em->getRepository('KZKwizBundle:Party')->find($party);
+
+
+        $user = $this->getUser();
+        $games = $em->getRepository('KZKwizBundle:Game')->findByParty($party);
+        $gameCurrent = $em->getRepository('KZKwizBundle:Game')->findBy(
+            array(
+                'party' => $party,
+                'user' => $this->getUser()
+            )
+
+        );
+
+        if ('case' == $malus[$key]['type']) {
+            if ('user' == $malus[$key]['for']) {
+                $this->move($party, $user, $malus[$key]['act']);
+            } elseif ('users' == $malus[$key]['for']) {
+                foreach ($games as $game) {
+                    if ($game->getUser() !== $this->getUser()) {
+                        $this->move($party, $game->getUser(), $malus[$key]['act']);
+                    }
+                }
+            }
+        } elseif ('inverse' == $malus[$key]['type']) {
+            $gameLast = $em->getRepository('KZKwizBundle:Game')->findBy(
+                array(
+                    'party' => $party,
+                ),
+                array(
+                    'square' => 'ASC'
+                ));
+            $diff = $gameCurrent[0]->getSquare()->getNumber() - $gameLast[0]->getSquare()->getNumber();
+            $this->move($party, $gameLast[0]->getUser(), $diff);
+            $this->move($party, $this->getUser(), -$diff);
+        }
     }
 
-    public function piegeAction(Square $square)
+    public function piegeAction($party)
     {
+        $malus = array(
+            array(
+                'text' => 'Retour à la case départ',
+                'type' => 'return',
+                'for' => 'user',
+                'act' => 0,
+            )
+        );
+        $nbTurn = count($malus);
+        $key = rand(0, $nbTurn - 1);
 
+        var_dump($malus[$key]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $party = $em->getRepository('KZKwizBundle:Party')->find($party);
+
+
+        $user = $this->getUser();
+        $games = $em->getRepository('KZKwizBundle:Game')->findByParty($party);
+        $gameCurrent = $em->getRepository('KZKwizBundle:Game')->findBy(
+            array(
+                'party' => $party,
+                'user' => $this->getUser()
+            )
+
+        );
+
+
+        if ('return' == $malus[$key]['type']) {
+            $this->move($party, $this->getUser(), -$gameCurrent[0]->getSquare()->getNumber());
+        }
     }
 
-    public function randomAction(Square $square)
+    public function randomAction($party)
     {
+        $select = array(
+            0 => 'bonus',
+            1 => 'malus',
+            2 => 'piege'
+        );
 
+        $key = rand(0,2);
+        $choice = $select[$key];
+        $method = $choice.'Action';
+        $this->$method($party);
     }
 
     public function prisonAction(Square $square)
