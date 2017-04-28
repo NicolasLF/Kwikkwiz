@@ -1,37 +1,53 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<!--Login Form-->
-{% if error is defined %}
-    {% if error is not empty %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-{% endif %}
-<form name="Login_form" id="Login_form" action="{{ path("fos_user_security_check") }}" method="post">
-    {% if csrf_token is defined %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-    {% endif %}
-    <div class="row">
-        <div class="form-group col-xs-12">
-            <label for="username" class="sr-only">{{ 'security.login.username'|trans }}</label>
-            <input type="text" class="form-control input-group-lg" placeholder="{{ 'security.login.username'|trans }}"
-                   id="username" name="_username" value="{{ last_username is defined }}" required="required"/>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-xs-12">
-            <label for="password" class="sr-only">{{ 'security.login.password'|trans }}</label>
-            <input type="password" class="form-control input-group-lg"
-                   placeholder="{{ 'security.login.password'|trans }}" id="password" name="_password"
-                   required="required"/>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-xs-12">
-            <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-        </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary" id="_submit" name="_submit"
-            value="{{ 'security.login.submit'|trans }}">{{ 'security.login.submit'|trans }}</button>
-</form>
-<!--Login Form Ends-->
+{% block body %}
+    <div class="formulaires">
+        <header>
+            <div class="row">
+                <div class="col s6 offset-s3 ">
+                    <img class="formBrandName" src="{{ asset('img/kwikkwizName.png') }}">
+                </div>
+            </div>
+        </header>
+
+        <!--Login Form-->
+        {% if error is defined %}
+            {% if error is not empty %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+        {% endif %}
+        <form name="Login_form" id="Login_form" action="{{ path("fos_user_security_check") }}" method="post">
+            {% if csrf_token is defined %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+            {% endif %}
+            <div class="row">
+                <div class="form-group col s6 offset-s3">
+                    <label for="username" class="sr-only formLabel">{{ 'Pseudo' }}</label>
+                    <input type="text" class="form-control input-group-lg"
+                           placeholder="{{ 'security.login.username'|trans }}"
+                           id="username" name="_username" required="required"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col s6 offset-s3">
+                    <label for="password" class="sr-only formLabel">{{ 'Mot de passe' }}</label>
+                    <input type="password" class="form-control input-group-lg"
+                           placeholder="{{ 'Mot de passe' }}" id="password" name="_password"
+                           required="required"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group form-group col s6 offset-s3">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                    <label for="remember_me">{{ 'Se souvenir de moi' }}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="submit" class="btn teal accent-2 col s6 offset-s3" id="_submit" name="_submit"
+                        value="{{ 'security.login.submit'|trans }}">{{ 'Se connecter' }}</button>
+            </div>
+        </form>
+    </div>
+    <!--Login Form Ends-->
+{% endblock body %}
