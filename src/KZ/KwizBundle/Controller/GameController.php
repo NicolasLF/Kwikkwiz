@@ -116,20 +116,32 @@ class GameController extends Controller
         }
 
     }
+    public function getMyPosition(Party $party)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('KZUserBundle:User')->find($id);
+        $game = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+            array(
+                'party' => $party,
+                'user' => $user
+            ));
+        return $game->getSquare()->getNumber();
+    }
     public function verifAnswerAction(Answer $answer, Party $party)
     {
         $status = $answer->getCorrect();
-        $question = $this->getOneQuestion();
+        $card = $this->getOneQuestion();
+        $question = $card;
         $answers = $this->getOneAnswer($question);
         $board = $this->getBoard($party);
-
+        $position = $this->getMyPosition($party);
        if($status==1) {
            $this->turn($party);
            $isTurn = $this->isTurn($party);
            if($isTurn==-1){
               return $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party->getId()));
            }
-           return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'answers'=>$answers, 'party'=>$party]);
+           return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answers, 'party'=>$party, 'position'=>$position]);
        }
        else{
            $this->setTurns($party);
@@ -142,7 +154,11 @@ class GameController extends Controller
     public function indexAction(Party $party)
     {
         $card = $this->getOneCard($party);
-        $answers = $this->getOneAnswer($card);
+        $question = $card;
+        $answer = '';
+        if(!is_string($card)){
+            $answer = $this->getOneAnswer($card);
+        }
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
@@ -156,7 +172,7 @@ class GameController extends Controller
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
 
-        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$card, 'answers'=>$answers, 'party'=>$party]);
+        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
     }
 
     public function historyAction(Party $party)
