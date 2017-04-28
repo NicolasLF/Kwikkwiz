@@ -3,80 +3,112 @@
 {% block title %}KwikKwiz!{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="hide-on-med-and-up">
-                <!-- CREATION DU SLIDER -->
-                <div class="slider fullscreen">
-                    <ul class="slides">
-                        <li>
-                            <img src="{{ asset('img/slider3.jpg') }}"> <!-- random image -->
-                            <div class="caption center-align">
-                                <img class="logoWelcome" src="{{ asset('img/kwikkwizLogoBlanc.png') }}">
-                                <h2 class="light white-text text-lighten-3">Intègre la Kwikysphère</h2>
-                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
-                                   href="/register">Crée ton kwiky !</a><br/>
-                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
-                                   href="/login">Connecte-toi !</a>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="{{ asset('img/slider1.jpg') }}"> <!-- random image -->
-                            <div class="caption center-align">
-                                <h2>Défie tes amis en temps réel</h2>
-                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
-                                   href="/register">Crée ton kwiky !</a><br/>
-                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
-                                   href="/login">Connecte-toi !</a>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="{{ asset('img/slider2.jpg') }}"> <!-- random image -->
-                            <div class="caption center-align">
-                                <h2>Choisis le mode de jeu qui te convient</h2>
-                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
-                                   href="/register">Crée ton kwiky !</a><br/>
-                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
-                                   href="/login">Connecte-toi !</a>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="{{ asset('img/slider4.jpg') }}"> <!-- random image -->
-                            <div class="caption center-align">
-                                <h2>Joue où tu veux, où tu le sens</h2>
-                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
-                                   href="/register">Crée ton kwiky !</a><br/>
-                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
-                                   href="/login">Connecte-toi !</a>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="{{ asset('img/slider5.jpg') }}"> <!-- random image -->
-                            <div class="caption center-align">
-                                <h2>Demande l'aide d'un ami kwiky</h2>
-                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
-                                   href="/register ">Crée ton kwiky !</a><br/>
-                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
-                                   href="/login">Connecte-toi !</a>
-                            </div>
-                        </li>
-                    </ul>
 
-                </div>
-            </div>
-            <div class="hide-on-med-and-down">
-                <div class="homePage">
-                    <div class="row">
-                        <div class="col lg12 hero">
-                        <span><img src="{{ asset('img/heroS5.png') }}">
-                        <img src="{{ asset('img/heroIphone.png') }}"></span>
-
+<div class="container hide-on-med-and-up">
+    <div class="row hide-on-med-and-up">
+        <div class="hide-on-med-and-up">
+            <!-- CREATION DU SLIDER -->
+            <div class="slider fullscreen">
+                <ul class="slides">
+                    <li>
+                        <img src="{{ asset('img/slider3.jpg') }}"> <!-- random image -->
+                        <div class="caption center-align">
+                            <img class="logoWelcome" src="{{ asset('img/kwikkwizLogoBlanc.png') }}">
+                            <h2 class="light white-text text-lighten-3">Intègre la Kwikysphère</h2>
+                            <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                               href="/register">Crée ton kwiky !</a><br/>
+                            <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                               href="/login">Connecte-toi !</a>
                         </div>
-                    </div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('img/slider1.jpg') }}"> <!-- random image -->
+                        <div class="caption center-align">
+                            <h2>Défie tes amis en temps réel</h2>
+                            <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                               href="/register">Crée ton kwiky !</a><br/>
+                            <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                               href="/login">Connecte-toi !</a>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('img/slider2.jpg') }}"> <!-- random image -->
+                        <div class="caption center-align">
+                            <h2>Choisis le mode de jeu qui te convient</h2>
+                            <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                               href="/register">Crée ton kwiky !</a><br/>
+                            <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                               href="/login">Connecte-toi !</a>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('img/slider4.jpg') }}"> <!-- random image -->
+                        <div class="caption center-align">
+                            <h2>Joue où tu veux, où tu le sens</h2>
+                            <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                               href="/register">Crée ton kwiky !</a><br/>
+                            <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                               href="/login">Connecte-toi !</a>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('img/slider5.jpg') }}"> <!-- random image -->
+                        <div class="caption center-align">
+                            <h2>Demande l'aide d'un ami kwiky</h2>
+                            <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                               href="/register ">Crée ton kwiky !</a><br/>
+                            <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                               href="/login">Connecte-toi !</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Version bureau -->
+<div class="hide-on-med-and-down "></div>
+<header class="hide-on-med-and-down ">
+    <nav class="hide-on-med-and-down ">
+        <div class="nav-wrapper">
+            <div class="row">
+
+                <div class=" col l2 offset-l5">
+                    <a href="/">
+                        <img class="formBrandLogo paddingTop" src="{{ asset('img/kwikkwizLogoLineWhite.png') }}">
+                    </a>
                 </div>
             </div>
         </div>
+    </nav>
+</header>
+
+
+{#<hr class="hrWelcome hide-on-med-and-down ">#}
+
+<div class="homePage paddingTop paddingTop2 hide-on-med-and-down ">
+    <div class="row paddingTop paddingBottom marginBottom2">
+        <div class="col l5 offset-l2 borderRight">
+                        <span>
+                            <img src="{{ asset('img/PROUT.png') }}">
+                            <img src="{{ asset('img/heroIphone.png') }}">
+                        </span>
+        </div>
+        <div class="row paddingTop paddingBottom marginBottom2">
+            <div class="col l5 ">
+                <span><img class="moinsGros" src="{{ asset('img/kwikkwizLogoBlanc.png') }}">
+                {#<img class="moinsGros" src="{{ asset('img/kwikkwizLogoLineWhite.png') }}"></span><br><br><br><br>#}
+                    <br><br><br><br><h2 CLASS="pasClasse"><B>ACHÈTE TOUT</B></h2><br><br><br>
+                <img class="moinsGros" src="http://haussmann.galerieslafayette.com/files/2014/07/Dispo_App_Store_FRnoir.png"><br>
+                <img class="moinsGros" src="https://designpieces.com/wp-content/uploads/2016/02/google-play-badge.png">
+            </div>
+        </div>
     </div>
+
+
     {% block javascripts %}
         <script>
             $(document).ready(function () {
@@ -85,5 +117,4 @@
         </script>
     {% endblock %}
 
-{% endblock %}
-
+    {% endblock %}
