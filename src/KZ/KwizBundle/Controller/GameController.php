@@ -276,7 +276,7 @@ class GameController extends Controller
         $this->setTurns($party);
     }
 
-    public function bonusAction($square, $party)
+    public function bonusAction($party)
     {
         $bonus = array(
             array(
@@ -304,6 +304,10 @@ class GameController extends Controller
         var_dump($bonus[$key]);
 
         $em = $this->getDoctrine()->getManager();
+
+        $party = $em->getRepository('KZKwizBundle:Party')->find($party);
+
+
         $user = $this->getUser();
         $games = $em->getRepository('KZKwizBundle:Game')->findByParty($party);
         $gameCurrent = $em->getRepository('KZKwizBundle:Game')->findBy(
@@ -332,9 +336,8 @@ class GameController extends Controller
                 array(
                     'square' => 'DESC'
                 ));
-
-            $diff = $gameFirst->getSquare()->getNumber() - $gameCurrent->getSquare()->getNumber();
-            $this->move($party, $gameFirst->getUser(), -$diff);
+            $diff = $gameFirst[0]->getSquare()->getNumber() - $gameCurrent[0]->getSquare()->getNumber();
+            $this->move($party, $gameFirst[0]->getUser(), -$diff);
             $this->move($party, $this->getUser(), $diff);
         }
 

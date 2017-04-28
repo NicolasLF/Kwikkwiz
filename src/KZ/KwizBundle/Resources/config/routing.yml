@@ -15,7 +15,7 @@ kz_kwiz_game:
     defaults: { _controller: KZKwizBundle:Game:index }
 
 kz_kwiz_test:
-    path:     /test/{square}
+    path:     /test/{party}
     defaults: { _controller: KZKwizBundle:Game:bonus }
 
 
