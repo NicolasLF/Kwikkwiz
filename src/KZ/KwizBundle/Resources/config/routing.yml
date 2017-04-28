@@ -18,4 +18,6 @@ kz_kwiz_test:
     path:     /test/{square}
     defaults: { _controller: KZKwizBundle:Game:bonus }
 
-
+kz_kwiz_carte:
+    path:     /carte
+    defaults: { _controller: KZKwizBundle:Carte:index }

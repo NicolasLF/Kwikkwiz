@@ -2,11 +2,14 @@
 
 {% block title %}KwikKwiz | Rejoins une partie{% endblock %}
 
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/styleCarte.css') }}"  media="screen,projection"/>
+{% endblock %}
+
 {% block body %}
     <header>
         <nav>
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo"> <img src="{{ asset('img/kwikkwizLogoLineWhite.png') }}"></a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">account_circle</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><img src="{{ asset('img/avatar3.png') }}"></li>
@@ -29,28 +32,22 @@
             </div>
         </nav>
     </header>
-    <div class="container-fluid joinParty">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col s12">
-                <h1>Rejoindre une partie</h1>
+            <div class="col s12 m7">
+                <div class="card">
+                    <div class="card-image">
+                        <span class="card-title">Nom Catégorie</span>
+                    </div>
+                    <div class="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <ul class="collection">
-                {% for party in parties %}
-                <div class="col s5 offset-s1"
-                <li class="collection-item avatar">
-                    <i class="material-icons circle black">play_arrow</i>
-                    <span class="title"> <a href="/joinParty/{{ party.id }}">{{ party.name }}</a></span>
-                    <p>Mode du jeu :{{ party.mode }}<br>
-                        Nombre de joueurs inscrits : {{ party.nbPlayer }}
-                    </p>
-                </li>
-            </div>
-
-            {% endfor %}
-            </ul>
         </div>
     </div>
     </div>
@@ -67,4 +64,5 @@
         </script>
 
     {% endblock %}
+
 {% endblock %}
