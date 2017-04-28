@@ -20,16 +20,16 @@ class LoadAvatarData extends AbstractFixture implements FixtureInterface, Ordere
     {
         $data = array(
             array(
-                'img' => 'avatar1.png',
+                'img' => 'Wicoo',
             ),
             array(
-                'img' => 'avatar2.png',
+                'img' => 'Mwartine',
             ),
             array(
-                'img' => 'avatar3.png',
+                'img' => 'Pawtwik',
             ),
             array(
-                'img' => 'avatar4.png',
+                'img' => 'Qwentin',
             ),
         );
         $i = 1;

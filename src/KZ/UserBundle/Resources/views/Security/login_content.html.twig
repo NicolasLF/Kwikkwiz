@@ -1,24 +1,47 @@
 {% trans_default_domain 'FOSUserBundle' %}
+{% extends '::base.html.twig' %}
+
+{% block title %}KwikKwiz | Connection{% endblock %}
 
 {% block body %}
-
     <header>
         <nav>
-            <div class="nav-wrapper">
-                <a href="/" class="brand-logo"> <img class="paddingTop"
-                                                     src="{{ asset('img/kwikkwizLogoLineWhite.png') }}"></a>
-                <a href="/" data-activates="mobile-demo" class="button-collapse"><i
-                            class="material-icons">home</i></a>
+            <div class="nav-wrapper ">
+                <div class="row">
+                    <div class="col s1 m1 l1">
+                        <a href="#" data-activates="mobile-demo" class="button-collapse ">
+                            <i class="material-icons iconeNoire paddingTop2">account_circle</i>
+                        </a>
+                    </div>
+
+
+                    <div class=" col s4 m4 l2 offset-s3 offset-m3 offset-l4">
+                        <a href="/"> <img class="formBrandLogo paddingTop"
+                                          src="{{ asset('img/kwikkwizLogoLineWhite.png') }}">
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <ul class="side-nav" id="mobile-demo">
+                    <li><img class="avatarNav" src="{{ asset('img/avatar3.png') }}"></li>
+                    <li><h3>Pseudo</h3></li>
+                    <hr class="hrNav"/>
+                    <li><a href="#"><i class="material-icons">history</i>Historique</a></li>
+                    <li><a href="/newGame"><i class="material-icons">add_circle</i>Créer une partie</a></li>
+                    <li><a href="/joinParty"><i class="material-icons">input</i>Rejoindre une partie</a></li>
+                    <li><a href="/"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
+                </ul>
             </div>
         </nav>
     </header>
 
-
     <div class="container-fluid joinParty">
-        <div class="row">
-            <div class="col s12">
-                <h1>CONNECTION</h1>
-            </div>
+
+    <div class="row">
+        <div class="col s12">
+            <h1>CONNECTION</h1>
         </div>
         <!--Login Form-->
         {% if error is defined %}
@@ -60,4 +83,17 @@
         </form>
     </div>
     <!--Login Form Ends-->
+    {% block javascripts %}
+        <script>
+            $(document).ready(function () {
+                $('.button-collapse').sideNav({
+                    menuWidth: 300, // Default is 300
+                    edge: 'left', // Choose the horizontal origin
+                    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                    draggable: true // Choose whether you can drag to open on touch screens
+                });
+            });
+        </script>
+
+    {% endblock %}
 {% endblock body %}
