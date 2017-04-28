@@ -23,14 +23,14 @@ class GameController extends Controller
     public function getThisSquare(Party $party, $num)
     {
         $em = $this->getDoctrine()->getManager();
-        return $em->getRepository('KZKwizBundle:Square')->findOneBy(['party'=>$party, 'number'=>$num]);
+        return $em->getRepository('KZKwizBundle:Square')->findOneBy(['party' => $party, 'number' => $num]);
     }
+
     public function startGame(Party $party)
     {
         $games = $this->getGames($party);
         $square = $this->getThisSquare($party, '0');
-        foreach ($games as $game)
-        {
+        foreach ($games as $game) {
             $em = $this->getDoctrine()->getManager();
             $game->getUser()->getId();
             $game = $em->getRepository('KZKwizBundle:Game')->find($game->getId());
@@ -39,6 +39,7 @@ class GameController extends Controller
         }
         return true;
     }
+
     public function getCategories()
     {
         $em = $this->getDoctrine()->getManager();
@@ -49,7 +50,7 @@ class GameController extends Controller
     public function getGames(Party $party)
     {
         $em = $this->getDoctrine()->getManager();
-        return $em->getRepository('KZKwizBundle:Game')->findBy(['party'=>$party]);
+        return $em->getRepository('KZKwizBundle:Game')->findBy(['party' => $party]);
     }
 
     public function generateBoard(Party $party)
@@ -119,6 +120,7 @@ class GameController extends Controller
         }
         return false;
     }
+
     public function indexAction(Party $party)
     {
         $board = $this->getBoard($party);
@@ -209,6 +211,7 @@ class GameController extends Controller
 
 
     }
+
     public function getThisGame(Square $square)
     {
         $em = $this->getDoctrine()->getManager();
@@ -221,6 +224,7 @@ class GameController extends Controller
         );
         return $games->getSquare()->getNumber();
     }
+
     public function move(Party $party, User $user, $move)
     {
         $em = $this->getDoctrine()->getManager();
@@ -232,7 +236,7 @@ class GameController extends Controller
         );
         $square = $em->getRepository('KZKwizBundle:Square')->findOneBy(
             array(
-                'number' => $game->getSquare()->getNumber()+$move,
+                'number' => $game->getSquare()->getNumber() + $move,
             )
         );
         $game->setSquare($square);
@@ -246,29 +250,113 @@ class GameController extends Controller
         dump($games);
         die();
     }
+
     public function turn(Party $party)
     {
-        $dice = rand(1,6);
+        $dice = rand(1, 6);
         $position = $this->playerPositionAction($party, $this->getUser()->getId());
         $square = $this->getThisSquare($party, $position);
-        $turn=true;
-        while($turn==true) {
+        $turn = true;
+        while ($turn == true) {
             if ($square->getCategory() == 'Q') {
                 //if true
                 $this->move($party, $this->getUser(), $dice);
-            }else if ($square->getCategory() == ' B') {
+            } else if ($square->getCategory() == ' B') {
 
-            }else if ($square->getCategory() == 'M') {
+            } else if ($square->getCategory() == 'M') {
 
-            }else if ($square->getCategory() == 'A') {
+            } else if ($square->getCategory() == 'A') {
 
-            }else if ($square->getCategory() == 'P') {
+            } else if ($square->getCategory() == 'P') {
 
-            }else if ($square->getCategory() == 'J') {
+            } else if ($square->getCategory() == 'J') {
 
             }
         }
         $this->setTurns($party);
+    }
+
+    public function bonusAction($square, $party)
+    {
+        $bonus = array(
+            array(
+                'text' => 'Avancez de 3 cases supplémentaires',
+                'type' => 'case',
+                'for' => 'user',
+                'act' => 3,
+            ),
+            array(
+                'text' => 'Tout le monde recule d\'une case... Sauf vous!',
+                'type' => 'case',
+                'for' => 'users',
+                'act' => -1,
+            ),
+            array(
+                'text' => 'Inverser la position avec le premier',
+                'type' => 'inverse',
+                'for' => 'Ouser',
+                'act' => 'inverse',
+            )
+        );
+        $nbTurn = count($bonus);
+        $key = rand(0, $nbTurn - 1);
+
+        var_dump($bonus[$key]);
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $games = $em->getRepository('KZKwizBundle:Game')->findByParty($party);
+        $gameCurrent = $em->getRepository('KZKwizBundle:Game')->findBy(
+            array(
+                'party' => $party,
+                'user' => $this->getUser()
+            )
+
+        );
+
+        if ('case' == $bonus[$key]['type']) {
+            if ('user' == $bonus[$key]['for']) {
+                $this->move($party, $user, $bonus[$key]['act']);
+            } elseif ('users' == $bonus[$key]['for']) {
+                foreach ($games as $game) {
+                    if ($game->getUser() !== $this->getUser()) {
+                        $this->move($party, $game->getUser(), $bonus[$key]['act']);
+                    }
+                }
+            }
+        } elseif ('inverse' == $bonus[$key]['type']) {
+            $gameFirst = $em->getRepository('KZKwizBundle:Game')->findBy(
+                array(
+                    'party' => $party,
+                ),
+                array(
+                    'square' => 'DESC'
+                ));
+
+            $diff = $gameFirst->getSquare()->getNumber() - $gameCurrent->getSquare()->getNumber();
+            $this->move($party, $gameFirst->getUser(), -$diff);
+            $this->move($party, $this->getUser(), $diff);
+        }
+
+    }
+
+    public function malusAction(Square $square)
+    {
+
+    }
+
+    public function piegeAction(Square $square)
+    {
+
+    }
+
+    public function randomAction(Square $square)
+    {
+
+    }
+
+    public function prisonAction(Square $square)
+    {
     }
 
     public function jsToPhp($id, $query)

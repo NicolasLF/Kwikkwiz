@@ -65,6 +65,7 @@ class LoadGameData extends AbstractFixture implements FixtureInterface, OrderedF
             $sql = new Game();
             $sql->setParty($item['party']);
             $sql->setUser($item['user']);
+            $sql->setTurn(0);
             $manager->persist($sql);
             $manager->flush();
         }
