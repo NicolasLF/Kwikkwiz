@@ -99,7 +99,7 @@ class GameController extends Controller
     {
         $question = $this->getOneQuestion();
         $answers = $this->getOneAnswer($question);
-        $category = $this->getThisCategory($question);
+//        $category = $this->getThisCategory($question);
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
@@ -114,7 +114,7 @@ class GameController extends Controller
         }else if($isTurn==-1){
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
-        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'answers'=>$answers, 'cat'=>$category]);
+        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'answers'=>$answers]);
     }
 
     public function historyAction(Party $party)
