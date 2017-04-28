@@ -105,7 +105,7 @@ class GameController extends Controller
     {
         $question = $this->getOneQuestion();
         $answers = $this->getOneAnswer($question);
-//        $category = $this->getThisCategory($question);
+//      $category = $this->getThisCategory($question);
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
