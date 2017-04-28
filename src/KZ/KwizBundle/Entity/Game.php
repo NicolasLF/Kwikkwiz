@@ -38,6 +38,31 @@ class Game
      */
     private $square;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="turn", type="integer")
+     */
+    private $turn;
+
+
+    
+    /**
+     * @return int
+     */
+    public function getTurn()
+    {
+        return $this->turn;
+    }
+
+    /**
+     * @param int $turn
+     */
+    public function setTurn($turn)
+    {
+        $this->turn = $turn;
+    }
+
 
 
     /**

@@ -57,7 +57,7 @@ class GameController extends Controller
     {
         $board = [];
         //Génération des cases questions
-        for ($i = 0; $i <= 26; $i++) {
+        for ($i = 1; $i <= 26; $i++) {
             $board[$i]['category'] = rand(0, 5);
             $board[$i]['type'] = 'Q';
         }
@@ -85,6 +85,11 @@ class GameController extends Controller
         $board[39]['type'] = 'J';
         $board[39]['category'] = rand(0, 5);
         shuffle($board);
+        $board[39]['type'] = 'Q';
+        $board[39]['category'] = rand(0, 5);
+        $tmp = $board[0];
+        $board[0] = $board[39];
+        $board[39] = $tmp;
         $categories = $this->getCategories();
         for ($i = 0; $i <= 39; $i++) {
             $em = $this->getDoctrine()->getManager();
@@ -114,12 +119,6 @@ class GameController extends Controller
             return true;
         }
         return false;
-    }
-
-    public function turn(party $party)
-    {
-        $position = $this->playerPositionAction($party, $this->getUser()->getId());
-        return $position;
     }
 
     public function indexAction(Party $party)
@@ -213,6 +212,69 @@ class GameController extends Controller
 
     }
 
+    public function getThisGame(Square $square)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('KZUserBundle:Square')->find($square);
+        $games = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+            array(
+                'party' => $party,
+                'user' => $user
+            )
+        );
+        return $games->getSquare()->getNumber();
+    }
+
+    public function move(Party $party, User $user, $move)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $game = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+            array(
+                'party' => $party,
+                'user' => $user
+            )
+        );
+        $square = $em->getRepository('KZKwizBundle:Square')->findOneBy(
+            array(
+                'number' => $game->getSquare()->getNumber() + $move,
+            )
+        );
+        $game->setSquare($square);
+        $em->persist($game);
+        $em->flush();
+        return $square;
+    }
+
+    public function setTurns()
+    {
+
+    }
+
+    public function turn(Party $party)
+    {
+        $dice = rand(1, 6);
+        $position = $this->playerPositionAction($party, $this->getUser()->getId());
+        $square = $this->getThisSquare($party, $position);
+        $turn = true;
+        while ($turn == true) {
+            if ($square->getCategory() == 'Q') {
+                //if true
+                $this->move($party, $this->getUser(), $dice);
+            } else if ($square->getCategory() == ' B') {
+
+            } else if ($square->getCategory() == 'M') {
+
+            } else if ($square->getCategory() == 'A') {
+
+            } else if ($square->getCategory() == 'P') {
+
+            } else if ($square->getCategory() == 'J') {
+
+            }
+        }
+        $this->setTurns();
+    }
+
     public function bonusAction($square, $party)
     {
         $bonus = array(
@@ -247,22 +309,21 @@ class GameController extends Controller
             array(
                 'party' => $party,
                 'user' => $this->getUser()
-                )
+            )
 
         );
 
-        if ( 'case' == $bonus[$key]['type']){
-            if ('user' == $bonus[$key]['for']){
-                $this->move($party,$user,$bonus[$key]['act']);
-            }
-            elseif ('users' == $bonus[$key]['for']) {
-                foreach ($games as $game){
-                    if ($game->getUser() !== $this->getUser()){
-                        $this->move($party,$game->getUser(),$bonus[$key]['act']);
+        if ('case' == $bonus[$key]['type']) {
+            if ('user' == $bonus[$key]['for']) {
+                $this->move($party, $user, $bonus[$key]['act']);
+            } elseif ('users' == $bonus[$key]['for']) {
+                foreach ($games as $game) {
+                    if ($game->getUser() !== $this->getUser()) {
+                        $this->move($party, $game->getUser(), $bonus[$key]['act']);
                     }
                 }
             }
-        } elseif ('inverse' == $bonus[$key]['type']){
+        } elseif ('inverse' == $bonus[$key]['type']) {
             $gameFirst = $em->getRepository('KZKwizBundle:Game')->findBy(
                 array(
                     'party' => $party,
@@ -272,8 +333,8 @@ class GameController extends Controller
                 ));
 
             $diff = $gameFirst->getSquare()->getNumber() - $gameCurrent->getSquare()->getNumber();
-            $this->move($party,$gameFirst->getUser(), -$diff);
-            $this->move($party,$this->getUser(), $diff);
+            $this->move($party, $gameFirst->getUser(), -$diff);
+            $this->move($party, $this->getUser(), $diff);
         }
 
     }
@@ -295,7 +356,6 @@ class GameController extends Controller
 
     public function prisonAction(Square $square)
     {
-
     }
 
     public function jsToPhp($id, $query)
