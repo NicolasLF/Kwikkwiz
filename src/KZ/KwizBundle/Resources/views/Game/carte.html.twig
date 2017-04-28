@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    {% if isTurn==0 %}
-        <h1>Attente de votre tour</h1>
-    {% elseif isTurn==1 %}
-        <h1>Jeu</h1>
-    {% else %}
-        <h1>Fin de partie</h1>
-    {% endif %}
+{% block title %}KwikKwiz | Rejoins une partie{% endblock %}
 
+{% block stylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/styleCarte.css') }}" media="screen,projection"/>
+{% endblock %}
+
+{% block body %}
     <header>
         <nav>
             <div class="nav-wrapper">
@@ -39,23 +37,36 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-image">
-                        <span class="card-title center-align">{{ cat.name }}</span>
+                        <span class="card-title center-align">Nom Catégorie</span>
                     </div>
                     <div class="card-content">
                         <div class="row">
                             <div class="col s8 offset-s2 center-align">
                                 <h3>Question</h3>
-                                <p>{{ question.content }}</p>
+                                <p>Question</p>
                             </div>
                         </div>
-                        {% for answer in answers %}
-                            <div class="row">
-                                <div class="col s6 offset-s3 center-align">
-                                    <a class="btn waves-effect btn teal accent-2 white-text darken-text-2"
-                                       href="{{ path('kz_kwiz_verif',{'id': {{ answer.id }} }) }}">{{ answer.answer }}</a>
-                                </div>
+
+                        <div class="row">
+                            <div class="col s6 offset-s3 center-align">
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse1</a>
                             </div>
-                        {% endfor %}
+                        </div>
+                        <div class="row">
+                            <div class="col s6 offset-s3 center-align">
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse2</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 offset-s3 center-align">
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse3</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 offset-s3 center-align">
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse4</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -77,7 +88,5 @@
         </script>
 
     {% endblock %}
-
-
 
 {% endblock %}
