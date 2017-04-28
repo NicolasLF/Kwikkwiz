@@ -9,6 +9,7 @@
 namespace KZ\KwizBundle\Controller;
 
 
+use KZ\KwizBundle\Entity\Answer;
 use KZ\KwizBundle\Entity\Game;
 use KZ\KwizBundle\Entity\History;
 use KZ\KwizBundle\Entity\Party;
@@ -90,10 +91,14 @@ class GameController extends Controller
         );
         return $category;
     }
+    public function verifAnswer(Answer $answer)
+    {
+
+    }
     public function indexAction(Party $party)
     {
         $question = $this->getOneQuestion();
-        $anwers = $this->getOneAnswer($question);
+        $answers = $this->getOneAnswer($question);
         $category = $this->getThisCategory($question);
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
@@ -109,7 +114,7 @@ class GameController extends Controller
         }else if($isTurn==-1){
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
-        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'anwers'=>$anwers, 'cat'=>$category]);
+        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'answers'=>$answers, 'cat'=>$category]);
     }
 
     public function historyAction(Party $party)
