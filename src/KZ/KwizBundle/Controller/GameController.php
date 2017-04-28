@@ -93,9 +93,32 @@ class GameController extends Controller
         );
         return $category;
     }
+    public function getOneCard(Party $party)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('KZUserBundle:User')->find($id);
+        $game = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+            array(
+                'party' => $party,
+                'user' => $user
+            ));
+        $square = $game->getSquare();
+        if ($square->getCategory() == 'Q') {
+            return $this->getOneQuestion();
+        } else if ($square->getCategory() == ' B') {
+            return $this->bonusAction($party);
+        } else if ($square->getCategory() == 'M') {
+            return $this->malusAction($party);
+        } else if ($square->getCategory() == 'P') {
+            return $this->piegeAction($party);
+        } else if ($square->getCategory() == 'A') {
+            return $this->randomAction($party);
+        }
+
+    }
     public function verifAnswerAction(Answer $answer, Party $party)
     {
-       $status = $answer->getCorrect();
+        $status = $answer->getCorrect();
         $question = $this->getOneQuestion();
         $answers = $this->getOneAnswer($question);
         $board = $this->getBoard($party);
@@ -118,9 +141,8 @@ class GameController extends Controller
     }
     public function indexAction(Party $party)
     {
-        $question = $this->getOneQuestion();
-        $answers = $this->getOneAnswer($question);
-//      $category = $this->getThisCategory($question);
+        $card = $this->getOneCard($party);
+        $answers = $this->getOneAnswer($card);
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
@@ -134,7 +156,7 @@ class GameController extends Controller
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
 
-        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'answers'=>$answers, 'party'=>$party]);
+        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$card, 'answers'=>$answers, 'party'=>$party]);
     }
 
     public function historyAction(Party $party)
@@ -206,8 +228,6 @@ class GameController extends Controller
                 'user' => $user
             ));
         return $games->getSquare()->getNumber();
-
-
     }
 
     public function getThisGame(Party $party)
@@ -286,17 +306,6 @@ class GameController extends Controller
         $this->move($party, $this->getUser(), $dice);
         $position = $this->playerPositionAction($party, $this->getUser()->getId());
         $square = $this->getThisSquare($party, $position);
-        if ($square->getCategory() == 'Q') {
-            $this->getOneQuestion();
-        } else if ($square->getCategory() == ' B') {
-            $this->bonusAction($party);
-        } else if ($square->getCategory() == 'M') {
-            $this->malusAction($party);
-        } else if ($square->getCategory() == 'P') {
-            $this->piegeAction($party);
-        } else if ($square->getCategory() == 'A') {
-            $this->randomAction($party);
-        }
         return true;
     }
 
