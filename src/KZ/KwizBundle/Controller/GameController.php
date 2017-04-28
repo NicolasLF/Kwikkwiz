@@ -96,30 +96,35 @@ class GameController extends Controller
     public function getOneCard(Party $party)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('KZUserBundle:User')->find($id);
-        $game = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+        $user = $this->getUser();
+        $game = $em->getRepository('KZKwizBundle:Game')->findBy(
             array(
                 'party' => $party,
                 'user' => $user
             ));
-        $square = $game->getSquare();
-        if ($square->getCategory() == 'Q') {
-            return $this->getOneQuestion();
-        } else if ($square->getCategory() == ' B') {
-            return $this->bonusAction($party);
-        } else if ($square->getCategory() == 'M') {
-            return $this->malusAction($party);
-        } else if ($square->getCategory() == 'P') {
-            return $this->piegeAction($party);
-        } else if ($square->getCategory() == 'A') {
-            return $this->randomAction($party);
+
+
+        $square = $game[0]->getSquare();
+        if ($square !== NULL){
+            if ($square->getCategory()->getName() == 'Q') {
+                return $this->getOneQuestion();
+            } else if ($square->getCategory()->getName() == ' B') {
+                return $this->bonusAction($party);
+            } else if ($square->getCategory()->getName() == 'M') {
+                return $this->malusAction($party);
+            } else if ($square->getCategory()->getName() == 'P') {
+                return $this->piegeAction($party);
+            } else if ($square->getCategory()->getName() == 'A') {
+                return $this->randomAction($party);
+            }
         }
+
 
     }
     public function getMyPosition(Party $party)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('KZUserBundle:User')->find($id);
+        $user = $em->getRepository('KZUserBundle:User')->find($this->getUser());
         $game = $em->getRepository('KZKwizBundle:Game')->findOneBy(
             array(
                 'party' => $party,
@@ -153,16 +158,18 @@ class GameController extends Controller
     }
     public function indexAction(Party $party)
     {
-        $card = $this->getOneCard($party);
-        $question = $card;
-        $answer = '';
-        if(!is_string($card)){
-            $answer = $this->getOneAnswer($card);
-        }
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
             $this->startGame($party);
+            $card = $this->getOneCard($party);
+            $question = $card;
+            $position = $this->getMyPosition($party);
+            $answer = '';
+            if(!is_string($card)){
+                $answer = $this->getOneAnswer($card);
+            }
+            return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
         }else {
             $isTurn = 2;
         }
@@ -171,8 +178,7 @@ class GameController extends Controller
         }else if($isTurn==-1){
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
-
-        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
+        return $this->render('KZKwizBundle:Game:game.html.twig', ['isTurn'=>$isTurn, 'party'=>$party]);
     }
 
     public function historyAction(Party $party)

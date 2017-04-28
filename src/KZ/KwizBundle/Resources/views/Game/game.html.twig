@@ -41,31 +41,24 @@
         <div class="col s10 offset-s1 marginBottom">
             <div class=" z-depth-4 carteFond">
 
-                <div class="card-title center-align">
-                    <h5>Nom Catégorie</h5>
+                <div class="card-title center-align" style="background-color: {{ question.category.color is defined }}">
+                    <h5>{% if question.category.name is not defined %}CARTE SPECIAL{% else %}{{ question.category.name }}{% endif %}</h5>
                 </div>
 
                 <div class="center-align card-content">
-                    <h3>Question</h3>
+                    <h3>{% if question.content is not defined %}{{ card is defined }}{% else %}{{ question.content }}{% endif %}</h3>
                     <img class="questionImg" src="{{ asset('img/avatar4.png') }}">
                 </div>
 
                 <div class="reponses">
+                    {% for answer in answers is defined %}
                     <div class="center-align btnReponse">
-                        <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse 1</a>
+                        <a style="background-color: {{ question.category.color is defined }}" class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="{{ path('kz_kwiz_verif', {'id': answer.id,'party': party.id}) }}">{{ answer.answer }}</a>
                     </div>
-
-                    <div class="center-align btnReponse">
-                        <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse 2</a>
-                    </div>
-
-                    <div class="center-align btnReponse">
-                        <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse 3</a>
-                    </div>
-
-                    <div class="center-align btnReponse ">
-                        <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse 4</a>
-                    </div>
+                    {% endfor %}
+                    {% if card.question is not defined and party.id is defined %}
+                        <a href="{{ path('kz_kwiz_game', {'id': party.id}) }}">OK</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
