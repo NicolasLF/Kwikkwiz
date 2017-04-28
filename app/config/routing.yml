@@ -1,3 +1,15 @@
+kz_kwiz_answer:
+    resource: "@KZKwizBundle/Controller/AnswerController.php"
+    type:     annotation
+
+kz_kwiz_question:
+    resource: "@KZKwizBundle/Controller/QuestionController.php"
+    type:     annotation
+
+kz_kwiz_category:
+    resource: "@KZKwizBundle/Controller/CategoryController.php"
+    type:     annotation
+
 kz_kwiz_party:
     resource: "@KZKwizBundle/Controller/PartyController.php"
     type:     annotation
