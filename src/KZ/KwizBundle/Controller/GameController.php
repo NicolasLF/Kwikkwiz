@@ -276,15 +276,15 @@ class GameController extends Controller
                 //if true
                 $this->move($party, $this->getUser(), $dice);
             } else if ($square->getCategory() == ' B') {
-
+                $this->bonusAction($party);
             } else if ($square->getCategory() == 'M') {
-
+                $this->malusAction($party);
             } else if ($square->getCategory() == 'A') {
-
+                $this->piegeAction($party);
             } else if ($square->getCategory() == 'P') {
-
+                $this->randomAction($piege);
             } else if ($square->getCategory() == 'J') {
-
+                $this->prisonAction($piege);
             }
         }
         $this->setTurns($party);
