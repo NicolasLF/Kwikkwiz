@@ -126,7 +126,7 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
 
 /********************** DEBUT STYLE NAV *************************/
 nav{
-    height:100px;
+    height:155px;
     background-color: #66FFCC ;
 }
 

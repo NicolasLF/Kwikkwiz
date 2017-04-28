@@ -21,7 +21,7 @@
                     <li><h3>Pseudo</h3></li>
                     <hr class="hrNav"/>
                     <li><a href="#"><i class="material-icons">history</i>Historique</a></li>
-                    <li><a href="/new_game"><i class="material-icons">add_circle</i>Créer une partie</a></li>
+                    <li><a href="/newGame"><i class="material-icons">add_circle</i>Créer une partie</a></li>
                     <li><a href="/joinParty"><i class="material-icons">input</i>Rejoindre une partie</a></li>
                     <li><a href="/"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
                 </ul>
@@ -34,15 +34,12 @@
                 <h1>Rejoindre une partie</h1>
                 <ul class="collection">
                     {% for party in parties %}
-
                         <li class="collection-item avatar">
-                            <i class="material-icons circle red">play_arrow</i>
+                            <i class="material-icons circle black">play_arrow</i>
                             <span class="title"> <a href="/joinParty/{{ party.id }}">{{ party.name }}</a></span>
-                            <p>{{ party.mode }}<br>
-                                {{ party.nbPlayer }}
+                            <p>Mode du jeu :{{ party.mode }}<br>
+                                Nombre de joueurs inscrits : {{ party.nbPlayer }}
                             </p>
-                            bkablabalbalballba
-                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
                         </li>
                     {% endfor %}
                 </ul>
