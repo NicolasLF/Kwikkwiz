@@ -212,8 +212,31 @@ select {
 /******************************* STYLE VERSION DESKTOP *******************************/
 
 .homePage {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #00b8d4;
+    background-color: #66FFCC;
+    height: 100wh;
+    border-top: solid 50px #66FFCC;
 }
 
+.hrWelcome {
+    background-color: #66FFCC;
+    margin: 0;
+    border: solid 1px white;
+}
+
+.marginBottom2 {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.marginTopFuckOff {
+ margin: 0;
+}
+
+.pasClasse {
+    color: white;
+}
+
+.moinsGros {
+    width: 30%;
+    height: 30%;
+}

@@ -3,8 +3,9 @@
 {% block title %}KwikKwiz!{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
+
+    <div class="container hide-on-med-and-up">
+        <div class="row hide-on-med-and-up">
             <div class="hide-on-med-and-up">
                 <!-- CREATION DU SLIDER -->
                 <div class="slider fullscreen">
@@ -64,20 +65,50 @@
 
                 </div>
             </div>
-            <div class="hide-on-med-and-down">
-                <div class="homePage">
-                    <div class="row">
-                        <div class="col lg12 hero">
-                        <span>
-                            <img src="{{ asset('img/heroS5.png') }}">
-                            <img src="{{ asset('img/heroIphone.png') }}">
-                        </span>
-                        </div>
+
+        </div>
+    </div>
+
+    <!-- Version bureau -->
+    <div class="hide-on-med-and-down "></div>
+    <header class="hide-on-med-and-down ">
+        <nav class="hide-on-med-and-down ">
+            <div class="nav-wrapper">
+                <div class="row">
+
+                    <div class=" col l2 offset-l5">
+                        <a href="/">
+                            <img class="formBrandLogo paddingTop" src="{{ asset('img/kwikkwizLogoLineWhite.png') }}">
+                        </a>
                     </div>
                 </div>
             </div>
+        </nav>
+    </header>
+
+
+    {#<hr class="hrWelcome hide-on-med-and-down ">#}
+
+    <div class="homePage paddingTop paddingTop2 hide-on-med-and-down ">
+    <div class="row paddingTop paddingBottom marginBottom2">
+        <div class="col l5 offset-l2 borderRight">
+                        <span>
+                            <img src="{{ asset('img/PROUT.png') }}">
+                            <img src="{{ asset('img/heroIphone.png') }}">
+                        </span>
+        </div>
+        <div class="row paddingTop paddingBottom marginBottom2">
+            <div class="col l5 ">
+                <span><img class="moinsGros" src="{{ asset('img/kwikkwizLogoBlanc.png') }}">
+                    {#<img class="moinsGros" src="{{ asset('img/kwikkwizLogoLineWhite.png') }}"></span><br><br><br><br>#}
+                    <br><br><br><br><h2 CLASS="pasClasse"><B>ACHÈTE TOUT</B></h2><br><br><br>
+                <img class="moinsGros" src="http://haussmann.galerieslafayette.com/files/2014/07/Dispo_App_Store_FRnoir.png"><br>
+                <img class="moinsGros" src="https://designpieces.com/wp-content/uploads/2016/02/google-play-badge.png">
+            </div>
         </div>
     </div>
+
+
     {% block javascripts %}
         <script>
             $(document).ready(function () {
@@ -87,4 +118,3 @@
     {% endblock %}
 
 {% endblock %}
-
