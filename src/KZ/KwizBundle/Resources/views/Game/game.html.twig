@@ -5,8 +5,10 @@
         <h1>Attente de votre tour</h1>
     {% elseif isTurn==1 %}
         <h1>Jeu</h1>
-    {% else %}
+    {% elseif isTurn==-1 %}
         <h1>Fin de partie</h1>
+    {% else %}
+        <h1>Attente de début</h1>
     {% endif %}
 
     <header>
