@@ -93,7 +93,7 @@ class GameController extends Controller
     }
     public function verifAnswerAction(Answer $answer)
     {
-        
+
     }
     public function indexAction(Party $party)
     {
@@ -110,7 +110,7 @@ class GameController extends Controller
             $isTurn = 2;
         }
         if($isTurn==0 or $isTurn==2){
-            header("Refresh: 1;url='/game/".$party->getId()."'");
+            header("Refresh: 3");
         }else if($isTurn==-1){
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
