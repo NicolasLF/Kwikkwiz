@@ -68,7 +68,7 @@ class GameController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $questions = $em->getRepository('KZKwizBundle:Question')->findAll();
-        $i = rand(0,count($questions));
+        $i = rand(0,count($questions)-1);
         return $questions[$i];
     }
     public function getOneAnswer($question)
@@ -110,7 +110,7 @@ class GameController extends Controller
             $isTurn = 2;
         }
         if($isTurn==0 or $isTurn==2){
-            header("Refresh: 3");
+            header("Refresh: 5");
         }else if($isTurn==-1){
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
@@ -245,19 +245,20 @@ class GameController extends Controller
             }
         }
     }
-    public function isTurn (Party $party)
+    public function isTurn(Party $party)
     {
         if($party->getActive()==0){
             return -1;
         }
         $em = $this->getDoctrine()->getManager();
-        $status = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+        $status = $em->getRepository('KZKwizBundle:Game')->findBy(
             array(
                 'party' => $party,
                 'user' => $this->getUser()
             )
         );
-        return $status->getTurn();
+
+        return $status[0]->getTurn();
     }
     public function turn(Party $party)
     {

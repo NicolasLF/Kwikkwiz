@@ -46,15 +46,15 @@
                     <div class="card-content">
                         <div class="row">
                             <div class="col s8 offset-s2 center-align">
-                                <h3>Question</h3>
-                                <p>{{ question.content }}</p>
+                                <h3>{{ question.content }}</h3>
+                                <p>Question</p>
                             </div>
                         </div>
                         {% for answer in answers %}
                             <div class="row">
                                 <div class="col s6 offset-s3 center-align">
                                     <a class="btn waves-effect btn teal accent-2 white-text darken-text-2"
-                                       href="{{ path('kz_kwiz_verif',{'id': {{ answer.id }} }) }}">{{ answer.answer }}</a>
+                                       href="{{ path('kz_kwiz_verif',{'id': answer.id, 'party': party.id }) }}">{{ answer.answer }}</a>
                                 </div>
                             </div>
                         {% endfor %}
