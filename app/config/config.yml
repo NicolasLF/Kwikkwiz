@@ -79,3 +79,9 @@ fos_user:
     registration:
         form:
             type: KZ\UserBundle\Form\RegistrationType
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~

@@ -1,0 +1,174 @@
+/********************** DEBUT GENERATEUR DES FONTS FAMILY  *************************/
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/Nunito/Nunito-Regular.eot');
+    src: url('../fonts/Nunito/Nunito-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Nunito/Nunito-Regular.woff') format('woff'),
+    url('../fonts/Nunito/Nunito-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nunito_bold';
+    src: url('../fonts/Nunito/Nunito-Bold.eot');
+    src: url('../fonts/Nunito/Nunito-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Nunito/Nunito-Bold.woff') format('woff'),
+    url('../fonts/Nunito/Nunito-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/********************** FIN GENERATEUR DES FONTS FAMILY  *************************/
+
+
+body{
+        font-family: 'Nunito', sans-serif;
+    }
+
+
+/********************** DEBUT STYLE PAGE WELCOME  *************************/
+.logoWelcome{
+    max-width: 50% !important;
+    max-height: 50% !important;
+}
+
+.slider .indicators .indicator-item{
+    background-color : white;
+}
+
+.slider .indicators .indicator-item.active{
+    background-color: #66FFCC;
+}
+
+.creaButton{
+    margin-bottom: 20px;
+}
+
+.slider.fullscreen ul.indicators{
+    bottom:10px;
+}
+
+/********************** FIN STYLE PAGE WELCOME  *************************/
+
+/* FORMULAIRES (pages login & register)-------------------------------------------------------------------------------*/
+.formulaires{
+    /*background-color: #66FFCC;*/
+    height:100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.formBrandName {
+    width: 100%;
+    display:block;
+    margin:auto;
+    padding-top: 40px;
+    padding-bottom: 30px;
+
+}
+
+.formBrandLogo {
+    width: 100%;
+    display:block;
+    margin:auto;
+    padding-top: 37px;
+}
+
+.formAvatar {
+    width: 100%;
+    display:block;
+    margin:auto;
+    padding: 0;
+}
+
+.noMarginBottom {
+    margin-bottom: 0;
+}
+
+.formLabel {
+    font-size: 0.8rem;
+    color: #0000FF;
+}
+
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #0000FF;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+}
+/* END FORMULAIRES (pages login & register)---------------------------------------------------------------------------*/
+
+/********************** DEBUT STYLE PAGE JOINPARTY  *************************/
+
+.joinParty{
+    background-color: white;
+    height: 100%;
+}
+
+.joinParty h1{
+    font-size:24px;
+    color : black;
+    text-align: center;
+}
+/********************** FIN STYLE PAGE JOINPARTY  *************************/
+
+
+/********************** DEBUT STYLE NAV *************************/
+nav{
+    height:155px;
+    background-color: #66FFCC ;
+}
+
+.nav-wrapper .material-icons{
+    font-size: 30px;
+}
+
+.side-nav{
+    background-color:  #66FFCC;
+}
+
+.side-nav li a{
+    color: white;
+}
+
+.side-nav li a i.material-icons{
+    color: white;
+}
+.side-nav li h3{
+    font-size:20px;
+    color: white;
+    font-family: 'Nunito_bold';
+    text-align: center;
+}
+
+.side-nav .avatarNav{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.brand-logo img{
+    margin-top: 10px;
+    width: 80%;
+    height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.hrNav{
+    width: 180px;
+    border:1px solid white;
+}
+/********************** FIN STYLE NAV *************************/
