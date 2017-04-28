@@ -2,80 +2,56 @@
 
 {% block body %}
     <div class="formulaires">
-        <header>
-            <div class="row">
-                <div class="col s6 offset-s3 ">
-                    <img class="formBrandName" src="{{ asset('img/kwikkwizName.png') }}">
-                </div>
-            </div>
-        </header>
-
-        <!--Login Form-->
-        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register', 'id': 'registration_form'}}) }}
-        <div class="form-group" id="fos_user_registration_form">
-            <div class="row">
-                <div class="form-group col s6 offset-s3">
-                    <label for="username" class="sr-only formLabel">Pseudo</label>
-                    {{ form_widget(form.username, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Pseudo'|trans } }) }}
-                    {{ form_errors(form.username) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col s6 offset-s3">
-                    <label for="email" class="sr-only formLabel">Email</label>
-                    {{ form_widget(form.email, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'form.email'|trans } }) }}
-                    {{ form_errors(form.email) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col s6 offset-s3">
-                    <label for="password" class="sr-only formLabel">Mot de passe</label>
-                    {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Mot de passe'|trans } }) }}
-                    {{ form_errors(form.plainPassword.first) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col s6 offset-s3">
-                    <label for="password" class="sr-only formLabel">Confirmer le mot de passe</label>
-                    {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Mot de passe'|trans } }) }}
-                    {{ form_errors(form.plainPassword.second) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col s6 offset-s3">
-                    <label for="username" class="sr-only formLabel">Choisir un avatar</label>
-                    {{ form_widget(form.Avatar, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Avatar'|trans } }) }}
-                    {{ form_errors(form.Avatar) }}
-                </div>
-                <div class="row noMarginBottom">
-                    <div class="col s4 offset-s2">
-                        <img class="formAvatar" src="{{ asset('img/avatar1.png') }}">
-                    </div>
-                    <div class="col s4">
-                        <img class="formAvatar" src="{{ asset('img/avatar2.png') }}">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s4 offset-s2">
-                        <img class="formAvatar" src="{{ asset('img/avatar3.png') }}">
-                    </div>
-                    <div class="col s4">
-                        <img class="formAvatar" src="{{ asset('img/avatar4.png') }}">
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
+    <header>
         <div class="row">
-            <div class="form-group col s6 offset-s3">
-                <button type="submit" class="btn btn-btn teal accent-2" value="{{ 'registration.submit'|trans }}">Enregistrer
-                </button>
-                <p><a href="#">Déjà membre ?</a></p>
+            <div class="col s6 offset-s3 ">
+                <img class="formBrandName" src="{{ asset('img/kwikkwizName.png') }}">
             </div>
         </div>
+    </header>
 
-        {{ form_end(form) }}
+    <!--Register Form-->
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register', 'id': 'registration_form'}}) }}
+    <div class="form-group" id="fos_user_registration_form">
+    <div class="row">
+        <div class="col s6 offset-s3 ">
+            <label for="username" class="sr-only formLabel">Pseudo</label>
+            {{ form_widget(form.username, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Pseudo'|trans } }) }}
+            {{ form_errors(form.username) }}
+        </div>
     </div>
-    <!--Login Form Ends-->
+    <div class="row">
+        <div class="col s6 offset-s3 ">
+            <label for="email" class="sr-only formLabel">Email</label>
+            {{ form_widget(form.email, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Email'|trans } }) }}
+            {{ form_errors(form.email) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3 ">
+            <label for="password" class="sr-only formLabel">Mot de passe</label>
+            {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Mot de passe'|trans } }) }}
+            {{ form_errors(form.plainPassword.first) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3 ">
+            <label for="password" class="sr-only formLabel">Mot de passe</label>
+            {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Confirmer le mot de passe'|trans } }) }}
+            {{ form_errors(form.plainPassword.second) }}
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="form-group col s6 offset-s3">
+            <button type="submit" class="btn btn-btn teal accent-2" value="{{ 'registration.submit'|trans }}">
+                Enregistrer
+            </button>
+            <p><a href="#">Déjà membre ?</a></p>
+        </div>
+
+    </div>
+    
+    {{ form_end(form) }}
+    <!--Register Form Ends-->
 {% endblock body %}
