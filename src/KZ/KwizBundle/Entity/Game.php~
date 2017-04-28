@@ -22,14 +22,12 @@ class Game
     private $id;
 
     /**
-     * @var int
      *
      * @ORM\ManyToOne(targetEntity="Party")
      */
     private $party;
 
     /**
-     * @var int
      *
      * @ORM\ManyToOne(targetEntity="KZ\UserBundle\Entity\User", fetch="EAGER")
      */
@@ -98,5 +96,39 @@ class Game
     public function getUsera()
     {
         return $this->user;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \KZ\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set square
+     *
+     * @param \KZ\KwizBundle\Entity\Square $square
+     *
+     * @return Game
+     */
+    public function setSquare(\KZ\KwizBundle\Entity\Square $square = null)
+    {
+        $this->square = $square;
+
+        return $this;
+    }
+
+    /**
+     * Get square
+     *
+     * @return \KZ\KwizBundle\Entity\Square
+     */
+    public function getSquare()
+    {
+        return $this->square;
     }
 }
