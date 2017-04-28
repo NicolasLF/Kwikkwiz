@@ -36,9 +36,11 @@ class GameController extends Controller
         foreach ($games as $game) {
             $em = $this->getDoctrine()->getManager();
             $game->getUser()->getId();
-            $game = $em->getRepository('KZKwizBundle:Game')->find($game->getId());
-            $game->setSquare($square);
-            $em->flush();
+            if($game->getSquare()==NULL){
+                $game = $em->getRepository('KZKwizBundle:Game')->find($game->getId());
+                $game->setSquare($square);
+                $em->flush();
+            }
         }
         return true;
     }
@@ -91,37 +93,86 @@ class GameController extends Controller
         );
         return $category;
     }
+    public function getOneCard(Party $party)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('KZUserBundle:User')->find($id);
+        $game = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+            array(
+                'party' => $party,
+                'user' => $user
+            ));
+        $square = $game->getSquare();
+        if ($square->getCategory() == 'Q') {
+            return $this->getOneQuestion();
+        } else if ($square->getCategory() == ' B') {
+            return $this->bonusAction($party);
+        } else if ($square->getCategory() == 'M') {
+            return $this->malusAction($party);
+        } else if ($square->getCategory() == 'P') {
+            return $this->piegeAction($party);
+        } else if ($square->getCategory() == 'A') {
+            return $this->randomAction($party);
+        }
+
+    }
+    public function getMyPosition(Party $party)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('KZUserBundle:User')->find($id);
+        $game = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+            array(
+                'party' => $party,
+                'user' => $user
+            ));
+        return $game->getSquare()->getNumber();
+    }
     public function verifAnswerAction(Answer $answer, Party $party)
     {
-       $status = $answer->getCorrect();
+        $status = $answer->getCorrect();
+        $card = $this->getOneQuestion();
+        $question = $card;
+        $answers = $this->getOneAnswer($question);
+        $board = $this->getBoard($party);
+        $position = $this->getMyPosition($party);
        if($status==1) {
            $this->turn($party);
+           $isTurn = $this->isTurn($party);
+           if($isTurn==-1){
+              return $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party->getId()));
+           }
+           return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answers, 'party'=>$party, 'position'=>$position]);
        }
        else{
-               $this->setTurns($party);
+           $this->setTurns($party);
+           $isTurn = $this->isTurn($party);
+          return $this->redirectToRoute('kz_kwiz_game', array('id'=>$party->getId()));
+
        }
+
     }
     public function indexAction(Party $party)
     {
-        $question = $this->getOneQuestion();
-        $answers = $this->getOneAnswer($question);
-//      $category = $this->getThisCategory($question);
+        $card = $this->getOneCard($party);
+        $question = $card;
+        $answer = '';
+        if(!is_string($card)){
+            $answer = $this->getOneAnswer($card);
+        }
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
-            if ($this->startGame($party)) {
-                $this->setTurns($party);
-            }
+            $this->startGame($party);
         }else {
             $isTurn = 2;
         }
         if($isTurn==0 or $isTurn==2){
-            header("Refresh: 5");
+            header("Refresh: 1");
         }else if($isTurn==-1){
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
 
-        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'answers'=>$answers, 'party'=>$party]);
+        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
     }
 
     public function historyAction(Party $party)
@@ -193,8 +244,6 @@ class GameController extends Controller
                 'user' => $user
             ));
         return $games->getSquare()->getNumber();
-
-
     }
 
     public function getThisGame(Party $party)
@@ -273,18 +322,7 @@ class GameController extends Controller
         $this->move($party, $this->getUser(), $dice);
         $position = $this->playerPositionAction($party, $this->getUser()->getId());
         $square = $this->getThisSquare($party, $position);
-        if ($square->getCategory() == 'Q') {
-            $this->getOneQuestion();
-        } else if ($square->getCategory() == ' B') {
-            $this->bonusAction($party);
-        } else if ($square->getCategory() == 'M') {
-            $this->malusAction($party);
-        } else if ($square->getCategory() == 'P') {
-            $this->piegeAction($party);
-        } else if ($square->getCategory() == 'A') {
-            $this->randomAction($party);
-        }
-
+        return true;
     }
 
     public function bonusAction($party)
@@ -332,10 +370,12 @@ class GameController extends Controller
         if ('case' == $bonus[$key]['type']) {
             if ('user' == $bonus[$key]['for']) {
                 $this->move($party, $user, $bonus[$key]['act']);
+                return $bonus[$key]['text'];
             } elseif ('users' == $bonus[$key]['for']) {
                 foreach ($games as $game) {
                     if ($game->getUser() !== $this->getUser()) {
                         $this->move($party, $game->getUser(), $bonus[$key]['act']);
+                        return $bonus[$key]['text'];
                     }
                 }
             }
@@ -350,6 +390,7 @@ class GameController extends Controller
             $diff = $gameFirst[0]->getSquare()->getNumber() - $gameCurrent[0]->getSquare()->getNumber();
             $this->move($party, $gameFirst[0]->getUser(), -$diff);
             $this->move($party, $this->getUser(), $diff);
+            return $bonus[$key]['text'];
         }
 
     }
@@ -399,10 +440,12 @@ class GameController extends Controller
         if ('case' == $malus[$key]['type']) {
             if ('user' == $malus[$key]['for']) {
                 $this->move($party, $user, $malus[$key]['act']);
+                return $malus[$key]['text'];
             } elseif ('users' == $malus[$key]['for']) {
                 foreach ($games as $game) {
                     if ($game->getUser() !== $this->getUser()) {
                         $this->move($party, $game->getUser(), $malus[$key]['act']);
+                        return $malus[$key]['text'];
                     }
                 }
             }
@@ -417,12 +460,13 @@ class GameController extends Controller
             $diff = $gameCurrent[0]->getSquare()->getNumber() - $gameLast[0]->getSquare()->getNumber();
             $this->move($party, $gameLast[0]->getUser(), $diff);
             $this->move($party, $this->getUser(), -$diff);
+            return $malus[$key]['text'];
         }
     }
 
     public function piegeAction($party)
     {
-        $malus = array(
+        $piege = array(
             array(
                 'text' => 'Retour à la case départ',
                 'type' => 'return',
@@ -430,10 +474,10 @@ class GameController extends Controller
                 'act' => 0,
             )
         );
-        $nbTurn = count($malus);
+        $nbTurn = count($piege);
         $key = rand(0, $nbTurn - 1);
 
-        var_dump($malus[$key]);
+        var_dump($piege[$key]);
 
         $em = $this->getDoctrine()->getManager();
 
@@ -451,8 +495,9 @@ class GameController extends Controller
         );
 
 
-        if ('return' == $malus[$key]['type']) {
+        if ('return' == $piege[$key]['type']) {
             $this->move($party, $this->getUser(), -$gameCurrent[0]->getSquare()->getNumber());
+            return $piege[$key]['text'];
         }
     }
 
