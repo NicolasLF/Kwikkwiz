@@ -3,7 +3,7 @@
 {% block title %}KwikKwiz | Rejoins une partie{% endblock %}
 
 {% block stylesheets %}
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/styleCarte.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/styleCarte.css') }}" media="screen,projection"/>
 {% endblock %}
 
 {% block body %}
@@ -34,21 +34,45 @@
     </header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col s12 m7">
+            <div class="col s12">
                 <div class="card">
                     <div class="card-image">
-                        <span class="card-title">Nom Catégorie</span>
+                        <span class="card-title center-align">Nom Catégorie</span>
                     </div>
                     <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
+                        <div class="row">
+                            <div class="col s8 offset-s2 center-align">
+                                <h3>Question</h3>
+                                <p>Question</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s6 offset-s3 center-align">
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse1</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 offset-s3 center-align">
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse2</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 offset-s3 center-align">
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse3</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 offset-s3 center-align">
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse4</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
     </div>
     {% block javascripts %}
