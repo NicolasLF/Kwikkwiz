@@ -142,7 +142,7 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
 
 /********************** DEBUT STYLE NAV *************************/
 nav{
-    height:155px;
+    height: auto;
     background-color: #66FFCC ;
     box-shadow: none;
 }
@@ -196,4 +196,12 @@ select {
 
 .largeurBt {
     width: 180px;
+}
+
+.iconeNoire {
+    color: black;
+}
+
+.paddingTop2 {
+    padding-top: 5px;
 }

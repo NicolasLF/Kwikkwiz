@@ -5,19 +5,24 @@
 {% block body %}
     <header>
         <nav>
-            <div class="nav-wrapper">
-                <a href="/" class="brand-logo"> <img class="paddingTop"
-                                                     src="{{ asset('img/kwikkwizLogoLineWhite.png') }}"></a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i
-                            class="material-icons">account_circle</i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><img src="{{ asset('img/avatar3.png') }}"></li>
-                    <li><h3>Pseudo</h3></li>
-                    <li><a href="#"><i class="material-icons">history</i>Historique</a></li>
-                    <li><a href="/new_game"><i class="material-icons">add_circle</i>Créer une partie</a></li>
-                    <li><a href="/joinParty"><i class="material-icons">input</i>Rejoindre une partie</a></li>
-                    <li><a href="/"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
-                </ul>
+            <div class="nav-wrapper ">
+                <div class="row">
+                    <div class="col s1 m1 l1">
+                <a href="#" data-activates="mobile-demo" class="button-collapse ">
+                    <i class="material-icons iconeNoire paddingTop2">account_circle</i>
+                </a>
+                </div>
+
+
+                    <div class=" col s4 m4 l2 offset-s3 offset-m3 offset-l4">
+                        <a href="/"> <img class="formBrandLogo paddingTop"
+                                          src="{{ asset('img/kwikkwizLogoLineWhite.png') }}">
+                        </a>
+                    </div>
+
+                </div>
+
+
                 <ul class="side-nav" id="mobile-demo">
                     <li><img class="avatarNav" src="{{ asset('img/avatar3.png') }}"></li>
                     <li><h3>Pseudo</h3></li>
