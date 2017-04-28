@@ -10,6 +10,7 @@ namespace KZ\KwizBundle\Controller;
 
 
 use KZ\KwizBundle\Entity\Answer;
+use KZ\KwizBundle\Entity\Category;
 use KZ\KwizBundle\Entity\Game;
 use KZ\KwizBundle\Entity\History;
 use KZ\KwizBundle\Entity\Party;
@@ -66,10 +67,10 @@ class GameController extends Controller
         $board = $em->getRepository('KZKwizBundle:Square')->findBy(['party' => $party]);
         return $board;
     }
-    public function getOneQuestion()
+    public function getOneQuestion(Category $cat)
     {
         $em = $this->getDoctrine()->getManager();
-        $questions = $em->getRepository('KZKwizBundle:Question')->findAll();
+        $questions = $em->getRepository('KZKwizBundle:Question')->findByCategory($cat);
         $i = rand(0,count($questions)-1);
         return $questions[$i];
     }
@@ -104,21 +105,7 @@ class GameController extends Controller
             ));
 
         $square = $game[0]->getSquare();
-        if ($square !== NULL){
-            if ($square->getCategory()->getName() == 'Q') {
-                return $this->getOneQuestion();
-            } else if ($square->getCategory()->getName() == ' B') {
-                return $this->bonusAction($party);
-            } else if ($square->getCategory()->getName() == 'M') {
-                return $this->malusAction($party);
-            } else if ($square->getCategory()->getName() == 'P') {
-                return $this->piegeAction($party);
-            } else if ($square->getCategory()->getName() == 'A') {
-                return $this->randomAction($party);
-            }
-        }
-
-
+        return $square;
     }
     public function getMyPosition(Party $party)
     {
@@ -134,23 +121,36 @@ class GameController extends Controller
     public function verifAnswerAction(Answer $answer, Party $party)
     {
         $status = $answer->getCorrect();
-        $card = $this->getOneQuestion();
-        $question = $card;
-        $answers = $this->getOneAnswer($question);
         $board = $this->getBoard($party);
         $position = $this->getMyPosition($party);
+        $alert = '';
+        $card = $this->getOneCard($party);
+        if ($card->getType() == 'A'){
+            $alert = $this->randomAction($party);
+        } elseif ($card->getType() == 'B'){
+            $alert = $this->bonusAction($party);
+        } elseif ($card->getType() == 'P'){
+            $alert = $this->piegeAction($party);
+        } elseif ($card->getType() == 'M'){
+            $alert = $this->malusAction($party);
+        }
+        $question = $this->getOneQuestion($card->getCategory());
+        $position = $this->getMyPosition($party);
+        $answer = $this->getOneAnswer($question);
+
        if($status==1) {
            $this->turn($party);
+           $card = $this->getOneCard($party);
            $isTurn = $this->isTurn($party);
            if($isTurn==-1){
               return $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party->getId()));
            }
-           return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answers, 'party'=>$party, 'position'=>$position]);
+           return $this->render('KZKwizBundle:Game:game.html.twig', ['alert' => $alert, 'board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
        }
        else{
            $this->setTurns($party);
            $isTurn = $this->isTurn($party);
-          return $this->redirectToRoute('kz_kwiz_game', array('id'=>$party->getId()));
+           return $this->redirectToRoute('kz_kwiz_game', array('id'=>$party->getId()));
 
        }
 
@@ -158,23 +158,36 @@ class GameController extends Controller
     public function indexAction(Party $party)
     {
         $board = $this->getBoard($party);
+        $em = $this->getDoctrine()->getManager();
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
             $this->startGame($party);
+            // carte
+            $alert = '';
             $card = $this->getOneCard($party);
-            $question = $card;
-            $position = $this->getMyPosition($party);
-            $answer = '';
-            if(!is_string($card)){
-                $answer = $this->getOneAnswer($card);
+            if ($card->getType() == 'A'){
+                $alert = $this->randomAction($party);
+            } elseif ($card->getType() == 'B'){
+                $alert = $this->bonusAction($party);
+            } elseif ($card->getType() == 'P'){
+                $alert = $this->piegeAction($party);
+            } elseif ($card->getType() == 'M'){
+                $alert = $this->malusAction($party);
             }
-            return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
+            $question = $this->getOneQuestion($card->getCategory());
+            $position = $this->getMyPosition($party);
+            $answer = $this->getOneAnswer($question);
+
+            if($isTurn!=1){
+                header("Refresh: 1");
+            }
+            return $this->render('KZKwizBundle:Game:game.html.twig', ['alert' => $alert, 'board' => $board, 'isTurn'=>$isTurn, 'card'=>$card, 'question'=>$question, 'answers'=>$answer, 'party'=>$party, 'position'=>$position]);
         }else {
             $isTurn = 2;
         }
         if($isTurn==0 or $isTurn==2){
             header("Refresh: 1");
-        }else if($isTurn==-1){
+        }elseif($isTurn==-1){
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
         return $this->render('KZKwizBundle:Game:game.html.twig', ['isTurn'=>$isTurn, 'party'=>$party]);
@@ -189,7 +202,6 @@ class GameController extends Controller
                 'user' => $this->getUser()
             )
         );
-        dump($history);
         return $this->render('KZKwizBundle:Game:end-game.html.twig', ['history' => $history, 'user'=>$this->getUser()]);
     }
 
@@ -355,8 +367,6 @@ class GameController extends Controller
         $nbTurn = count($bonus);
         $key = rand(0, $nbTurn - 1);
 
-        var_dump($bonus[$key]);
-
         $em = $this->getDoctrine()->getManager();
 
         $party = $em->getRepository('KZKwizBundle:Party')->find($party);
@@ -425,8 +435,6 @@ class GameController extends Controller
         $nbTurn = count($malus);
         $key = rand(0, $nbTurn - 1);
 
-        var_dump($malus[$key]);
-
         $em = $this->getDoctrine()->getManager();
 
         $party = $em->getRepository('KZKwizBundle:Party')->find($party);
@@ -481,8 +489,6 @@ class GameController extends Controller
         );
         $nbTurn = count($piege);
         $key = rand(0, $nbTurn - 1);
-
-        var_dump($piege[$key]);
 
         $em = $this->getDoctrine()->getManager();
 
