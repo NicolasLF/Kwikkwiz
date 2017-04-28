@@ -166,8 +166,6 @@ class GameController extends Controller
                 $i++;
                 $em->persist($history);
                 $em->flush();
-
-
             }
 
 
@@ -246,9 +244,25 @@ class GameController extends Controller
     }
     public function setTurns(Party $party)
     {
+        $em = $this->getDoctrine()->getManager();
         $games = $this->getGames($party);
-        dump($games);
-        die();
+        for($i=0;$i<count($games);$i++){
+            if($games[$i]->getTurn()==1){
+                $games[$i]->setTurn(0);
+                $em->persist($games[$i]);
+                $em->flush();
+                if($i+1<count($games)){
+                    $games[$i+1]->setTurn(1);
+                    $em->persist($games[$i+1]);
+                    $em->flush();
+                }else {
+                    $games[0]->setTurn(1);
+                    $em->persist($games[0]);
+                    $em->flush();
+                }
+                $i=count($games);
+            }
+        }
     }
 
     public function turn(Party $party)
