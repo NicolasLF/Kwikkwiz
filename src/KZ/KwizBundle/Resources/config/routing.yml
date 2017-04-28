@@ -15,8 +15,8 @@ kz_kwiz_game:
     defaults: { _controller: KZKwizBundle:Game:index }
 
 kz_kwiz_test:
-    path:     /test/{id}
-    defaults: { _controller: KZKwizBundle:Game:bonus }
+    path:     /test/{party}
+    defaults: { _controller: KZKwizBundle:Game:random }
 
 kz_kwiz_endGame:
     path:     /game/history/{id}

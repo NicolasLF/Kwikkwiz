@@ -38,6 +38,8 @@ class PartyType extends AbstractType
             ))
             ->add('level', EntityType::class, array(
                 'class' => 'KZKwizBundle:Level',
+                'expanded' => false,
+                'multiple' => false,
                 'choice_label' => 'name'
             ));
     }
