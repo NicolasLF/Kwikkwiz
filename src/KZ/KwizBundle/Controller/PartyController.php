@@ -51,7 +51,6 @@ class PartyController extends Controller
             $em->flush();
             $nbPlayerActive = $this->getPlayers($party);
             if($nbPlayerActive==$party->getNbPlayer()){
-                die('full');
                 $party->setFull(true);
                 $em->persist($party);
                 $em->flush();

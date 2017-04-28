@@ -42,7 +42,7 @@
                 <div class="col s5 offset-s1"
                 <li class="collection-item avatar">
                     <i class="material-icons circle black">play_arrow</i>
-                    <span class="title"> <a href="/joinParty/{{ party.id }}">{{ party.name }}</a></span>
+                    <span class="title"> <a href="{{ path('kz_kwiz_joinParty', {'id': party.id}) }}">{{ party.name }}</a></span>
                     <p>Mode du jeu :{{ party.mode }}<br>
                         Nombre de joueurs inscrits : {{ party.nbPlayer }}
                     </p>
