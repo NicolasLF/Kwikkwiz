@@ -1,15 +1,25 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block body %}
-    <div class="formulaires">
-        <header>
-            <div class="row">
-                <div class="col s6 offset-s3 ">
-                    <img class="formBrandName" src="{{ asset('img/kwikkwizName.png') }}">
-                </div>
-            </div>
-        </header>
 
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo"> <img class="paddingTop"
+                                                     src="{{ asset('img/kwikkwizLogoLineWhite.png') }}"></a>
+                <a href="/" data-activates="mobile-demo" class="button-collapse"><i
+                            class="material-icons">home</i></a>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container-fluid joinParty">
+        <div class="row">
+            <div class="col s12">
+                <h1>CONNECTION</h1>
+            </div>
+        </div>
         <!--Login Form-->
         {% if error is defined %}
             {% if error is not empty %}
