@@ -345,10 +345,12 @@ class GameController extends Controller
         if ('case' == $bonus[$key]['type']) {
             if ('user' == $bonus[$key]['for']) {
                 $this->move($party, $user, $bonus[$key]['act']);
+                return $bonus[$key]['text'];
             } elseif ('users' == $bonus[$key]['for']) {
                 foreach ($games as $game) {
                     if ($game->getUser() !== $this->getUser()) {
                         $this->move($party, $game->getUser(), $bonus[$key]['act']);
+                        return $bonus[$key]['text'];
                     }
                 }
             }
@@ -363,6 +365,7 @@ class GameController extends Controller
             $diff = $gameFirst[0]->getSquare()->getNumber() - $gameCurrent[0]->getSquare()->getNumber();
             $this->move($party, $gameFirst[0]->getUser(), -$diff);
             $this->move($party, $this->getUser(), $diff);
+            return $bonus[$key]['text'];
         }
 
     }
@@ -412,10 +415,12 @@ class GameController extends Controller
         if ('case' == $malus[$key]['type']) {
             if ('user' == $malus[$key]['for']) {
                 $this->move($party, $user, $malus[$key]['act']);
+                return $malus[$key]['text'];
             } elseif ('users' == $malus[$key]['for']) {
                 foreach ($games as $game) {
                     if ($game->getUser() !== $this->getUser()) {
                         $this->move($party, $game->getUser(), $malus[$key]['act']);
+                        return $malus[$key]['text'];
                     }
                 }
             }
@@ -430,12 +435,13 @@ class GameController extends Controller
             $diff = $gameCurrent[0]->getSquare()->getNumber() - $gameLast[0]->getSquare()->getNumber();
             $this->move($party, $gameLast[0]->getUser(), $diff);
             $this->move($party, $this->getUser(), -$diff);
+            return $malus[$key]['text'];
         }
     }
 
     public function piegeAction($party)
     {
-        $malus = array(
+        $piege = array(
             array(
                 'text' => 'Retour à la case départ',
                 'type' => 'return',
@@ -443,10 +449,10 @@ class GameController extends Controller
                 'act' => 0,
             )
         );
-        $nbTurn = count($malus);
+        $nbTurn = count($piege);
         $key = rand(0, $nbTurn - 1);
 
-        var_dump($malus[$key]);
+        var_dump($piege[$key]);
 
         $em = $this->getDoctrine()->getManager();
 
@@ -464,8 +470,9 @@ class GameController extends Controller
         );
 
 
-        if ('return' == $malus[$key]['type']) {
+        if ('return' == $piege[$key]['type']) {
             $this->move($party, $this->getUser(), -$gameCurrent[0]->getSquare()->getNumber());
+            return $piege[$key]['text'];
         }
     }
 
