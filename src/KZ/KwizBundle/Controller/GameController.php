@@ -36,9 +36,11 @@ class GameController extends Controller
         foreach ($games as $game) {
             $em = $this->getDoctrine()->getManager();
             $game->getUser()->getId();
-            $game = $em->getRepository('KZKwizBundle:Game')->find($game->getId());
-            $game->setSquare($square);
-            $em->flush();
+            if($game->getSquare()==NULL){
+                $game = $em->getRepository('KZKwizBundle:Game')->find($game->getId());
+                $game->setSquare($square);
+                $em->flush();
+            }
         }
         return true;
     }
@@ -98,7 +100,7 @@ class GameController extends Controller
            $this->turn($party);
        }
        else{
-               $this->setTurns($party);
+           $this->setTurns($party);
        }
     }
     public function indexAction(Party $party)
@@ -109,9 +111,7 @@ class GameController extends Controller
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
-            if ($this->startGame($party)) {
-                $this->setTurns($party);
-            }
+            $this->startGame($party);
         }else {
             $isTurn = 2;
         }
