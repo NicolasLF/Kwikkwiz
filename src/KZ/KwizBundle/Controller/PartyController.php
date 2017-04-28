@@ -45,6 +45,7 @@ class PartyController extends Controller
             $game = new Game();
             $game->setUser($this->getUser());
             $game->setParty($party);
+            $game->setTurn(0);
             $em->persist($game);
             $em->flush();
             $nbPlayerActive = $this->getPlayers($party);
@@ -80,6 +81,7 @@ class PartyController extends Controller
             $game = new Game;
             $game->setUser($this->getUser());
             $game->setParty($party);
+            $game->setTurn(1);
             $em->persist($game);
             $em->flush();
             return $this->redirectToRoute('kz_kwiz_game', array('id' => $party->getId()));
