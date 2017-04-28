@@ -7,68 +7,73 @@
 {% endblock %}
 
 {% block body %}
-    <header>
-        <nav>
-            <div class="nav-wrapper">
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">account_circle</i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><img src="{{ asset('img/avatar3.png') }}"></li>
-                    <li><h3>Pseudo</h3></li>
-                    <li><a href="#"><i class="material-icons">history</i>Historique</a></li>
-                    <li><a href="/new_game"><i class="material-icons">add_circle</i>Créer une partie</a></li>
-                    <li><a href="/joinParty"><i class="material-icons">input</i>Rejoindre une partie</a></li>
-                    <li><a href="/"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
-                </ul>
-                <ul class="side-nav" id="mobile-demo">
-                    <li><img class="avatarNav" src="{{ asset('img/avatar3.png') }}"></li>
-                    <li><h3>Pseudo</h3></li>
+    <div class="hide-on-med-and-up">
+        <header>
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">account_circle</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><img src="{{ asset('img/avatar3.png') }}"></li>
+                        <li><h3>Pseudo</h3></li>
+                        <li><a href="#"><i class="material-icons">history</i>Historique</a></li>
+                        <li><a href="/new_game"><i class="material-icons">add_circle</i>Créer une partie</a></li>
+                        <li><a href="/joinParty"><i class="material-icons">input</i>Rejoindre une partie</a></li>
+                        <li><a href="/"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
+                    </ul>
+                    <ul class="side-nav" id="mobile-demo">
+                        <li><img class="avatarNav" src="{{ asset('img/avatar3.png') }}"></li>
+                        <li><h3>Pseudo</h3></li>
 
-                    <hr class="hrNav"/>
-                    <li><a href="#"><i class="material-icons">history</i>Historique</a></li>
-                    <li><a href="/newGame"><i class="material-icons">add_circle</i>Créer une partie</a></li>
-                    <li><a href="/joinParty"><i class="material-icons">input</i>Rejoindre une partie</a></li>
-                    <li><a href="/"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col s12">
-                <div class="card">
-                    <div class="card-image">
-                        <span class="card-title center-align">Nom Catégorie</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="row">
-                            <div class="col s8 offset-s2 center-align">
-                                <h3>Question</h3>
+                        <hr class="hrNav"/>
+                        <li><a href="#"><i class="material-icons">history</i>Historique</a></li>
+                        <li><a href="/newGame"><i class="material-icons">add_circle</i>Créer une partie</a></li>
+                        <li><a href="/joinParty"><i class="material-icons">input</i>Rejoindre une partie</a></li>
+                        <li><a href="/"><i class="material-icons">power_settings_new</i>Déconnexion</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-image">
+                            <span class="card-title center-align">Nom Catégorie</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col s8 offset-s2 center-align">
+                                    <h3>Question</h3>
+                                </div>
+                            </div>
+
+                            <div class="col s12  center-align">
+                                <img src="{{ asset('img/avatar2.png') }}">
                             </div>
                         </div>
 
-                        <div class="col s12  center-align">
-                           <img src="{{ asset('img/avatar2.png') }}">
-                        </div>
-                    </div>
-
                         <div class="row">
                             <div class="col s6 offset-s3 center-align">
-                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse1</a>
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2"
+                                   href="#">Réponse1</a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col s6 offset-s3 center-align">
-                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse2</a>
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2"
+                                   href="#">Réponse2</a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col s6 offset-s3 center-align">
-                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse3</a>
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2"
+                                   href="#">Réponse3</a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col s6 offset-s3 center-align">
-                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="#">Réponse4</a>
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2"
+                                   href="#">Réponse4</a>
                             </div>
                         </div>
                     </div>

@@ -197,3 +197,20 @@ select {
 .largeurBt {
     width: 180px;
 }
+
+
+
+/******************************* STYLE VERSION DESKTOP *******************************/
+
+.homePage {
+    width: 100%;
+    max-height: 100vh;
+    background-color: #00b8d4;
+}
+
+.hero{
+    float: right;
+    height: 100%;
+    position: relative;
+    width: 50%;
+}
