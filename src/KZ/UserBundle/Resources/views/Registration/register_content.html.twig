@@ -42,14 +42,20 @@
         </div>
     </div>
     <div class="row">
+        <div class="col s6 offset-s3">
+            <label for="username" class="sr-only formLabel">Choisir un avatar</label>
+            {{ form_widget(form.Avatar, { 'attr': {'class': 'form-control input-group-lg', 'placeholder': 'Avatar'|trans } }) }}
+            {{ form_errors(form.Avatar) }}
+        </div>
+    </div>
 
+    <div class="row">
         <div class="form-group col s6 offset-s3">
             <button type="submit" class="btn btn-btn teal accent-2" value="{{ 'registration.submit'|trans }}">
                 Enregistrer
             </button>
             <p><a href="#">Déjà membre ?</a></p>
         </div>
-
     </div>
 
     {{ form_end(form) }}
