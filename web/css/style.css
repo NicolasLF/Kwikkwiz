@@ -142,7 +142,7 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
 
 /********************** DEBUT STYLE NAV *************************/
 nav{
-    height:155px;
+    height: auto;
     background-color: #66FFCC ;
     box-shadow: none;
 }
@@ -165,7 +165,7 @@ nav{
 .side-nav li h3{
     font-size:20px;
     color: white;
-    font-family: 'Nunito_bold';
+    font-family: 'Nunito_bold', sans-serif;
     text-align: center;
 }
 
@@ -199,6 +199,15 @@ select {
 }
 
 
+.iconeNoire {
+    color: black;
+}
+
+.paddingTop2 {
+    padding-top: 5px;
+}
+
+
 
 /******************************* STYLE VERSION DESKTOP *******************************/
 
@@ -207,3 +216,4 @@ select {
     min-height: 100vh;
     background-color: #00b8d4;
 }
+
