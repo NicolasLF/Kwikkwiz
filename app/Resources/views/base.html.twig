@@ -16,6 +16,16 @@
     <body>
         {% block body %}
         {% endblock %}
+        <div class="hide-on-med-and-down">
+            <div class="homePage">
+                <div class="row">
+                    <div class="col lg12 hero">
+                        <img src="{{ asset('img/heroS5.png') }}">
+                        <img src="{{ asset('img/heroIphone.png') }}">
+                    </div>
+                </div>
+            </div>
+        </div>
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
         {% block javascripts %}

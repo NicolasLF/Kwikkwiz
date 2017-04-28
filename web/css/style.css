@@ -30,8 +30,8 @@ body{
 
 /********************** DEBUT STYLE PAGE WELCOME  *************************/
 .logoWelcome{
-    max-width: 50% !important;
-    max-height: 50% !important;
+    max-width: 80% !important;
+    max-height: 80% !important;
 }
 
 .slider .indicators .indicator-item{
@@ -192,4 +192,25 @@ nav{
 
 select {
     display: inherit;
+}
+
+.largeurBt {
+    width: 180px;
+}
+
+
+
+/******************************* STYLE VERSION DESKTOP *******************************/
+
+.homePage {
+    width: 100%;
+    max-height: 100vh;
+    background-color: #00b8d4;
+}
+
+.hero{
+    float: right;
+    height: 100%;
+    position: relative;
+    width: 50%;
 }

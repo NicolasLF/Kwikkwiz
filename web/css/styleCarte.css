@@ -1,5 +1,5 @@
 body{
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 nav{
@@ -10,7 +10,7 @@ nav{
 }
 
 .card{
-    background-color: rgba(255,255,255,0.8) !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
     color: white;
 }
 .card .card-image{
@@ -20,7 +20,9 @@ nav{
 .card-title{
     color: white;
     background-color: #66FFCC;
-    width:400px;
+    width:100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .card-action div{
@@ -30,7 +32,7 @@ nav{
 }
 
 .card .card-content{
-    height: 500px;
+    height: 300px;
     margin-right: auto;
     margin-left: auto;
     display: block;
@@ -39,4 +41,31 @@ nav{
 
 .card-content h3 {
     color: black !important;
+}
+
+.questionImg {
+    background-color: black;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.btnReponse {
+    padding-bottom: 20px;
+}
+
+.carte {
+    margin-bottom: 20px;
+}
+
+.marginBottom {
+    margin-bottom: 20px;
+    margin-top: -85px;
+}
+
+.iconeNoire {
+    color: black;
+}
+
+.carteFond {
+    background-color: rgb(255, 255, 255);
 }

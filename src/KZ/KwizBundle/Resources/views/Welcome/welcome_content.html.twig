@@ -3,69 +3,72 @@
 {% block title %}KwikKwiz!{% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="row">
-        {#<div class="carousel carousel-slider">
-            <div class="carousel-fixed-item center">
-                <a class="btn waves-effect white grey-text darken-text-2">Crée ton kwicky !</a>
+    <div class="container">
+        <div class="row">
+            <div class="hide-on-med-and-up">
+                <!-- CREATION DU SLIDER -->
+                <div class="slider fullscreen">
+                    <ul class="slides">
+                        <li>
+                            <img src="{{ asset('img/slider3.jpg') }}"> <!-- random image -->
+                            <div class="caption center-align">
+                                <img class="logoWelcome" src="{{ asset('img/kwikkwizLogoBlanc.png') }}">
+                                <h2 class="light white-text text-lighten-3">Intègre la Kwikysphère</h2>
+                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                                   href="/register">Crée ton kwiky !</a><br/>
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                                   href="/login">Connecte-toi !</a>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="{{ asset('img/slider1.jpg') }}"> <!-- random image -->
+                            <div class="caption center-align">
+                                <h2>Défie tes amis en temps réel</h2>
+                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                                   href="/register">Crée ton kwiky !</a><br/>
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                                   href="/login">Connecte-toi !</a>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="{{ asset('img/slider2.jpg') }}"> <!-- random image -->
+                            <div class="caption center-align">
+                                <h2>Choisis le mode de jeu qui te convient</h2>
+                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                                   href="/register">Crée ton kwiky !</a><br/>
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                                   href="/login">Connecte-toi !</a>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="{{ asset('img/slider4.jpg') }}"> <!-- random image -->
+                            <div class="caption center-align">
+                                <h2>Joue où tu veux, où tu le sens</h2>
+                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                                   href="/register">Crée ton kwiky !</a><br/>
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                                   href="/login">Connecte-toi !</a>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="{{ asset('img/slider5.jpg') }}"> <!-- random image -->
+                            <div class="caption center-align">
+                                <h2>Demande l'aide d'un ami kwiky</h2>
+                                <a class="btn waves-effect white black-text darken-text-2 creaButton largeurBt"
+                                   href="/register ">Crée ton kwiky !</a><br/>
+                                <a class="btn waves-effect btn teal accent-2 white-text darken-text-2 largeurBt"
+                                   href="/login">Connecte-toi !</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
             </div>
-            <div class="carousel-item" href="#one!"><img src="{{ asset('img/slider1.jpg') }}"></div>
-            <a class="carousel-item" href="#two!"><img src="{{  asset('img/slider2.jpg') }}"></a>
-            <a class="carousel-item" href="#three!"><img src="{{  asset('img/slider3.jpg') }}"></a>
-            <a class="carousel-item" href="#four!"><img src="{{  asset('img/slider4.jpg') }}"></a>
-            <a class="carousel-item" href="#five!"><img src="{{  asset('img/slider5.jpg') }}"></a>
-        </div>#}
-<!-- CREATION DU SLIDER -->
-        <div class="slider fullscreen">
-            <ul class="slides">
-                <li>
-                    <img src="{{ asset('img/slider3.jpg') }}"> <!-- random image -->
-                    <div class="caption center-align">
-                        <img class="logoWelcome" src="{{ asset('img/kwikkwizLogoBlanc.png') }}">
-                        <h5 class="light white-text text-lighten-3">Intégres la Kwikysphère</h5>
-                        <a class="btn waves-effect white black-text darken-text-2 creaButton" href="/register">Crée ton kwiky !</a><br/>
-                        <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="/login">Connectes toi !</a>
-                    </div>
-                </li>
-                <li>
-                    <img src="{{ asset('img/slider1.jpg') }}"> <!-- random image -->
-                    <div class="caption center-align">
-                        <h3>Défies tes amis en temps réel !</h3>
-                        <a class="btn waves-effect white black-text darken-text-2 creaButton" href="/register">Crée ton kwiky !</a><br/>
-                        <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="/login">Connectes toi !</a>
-                    </div>
-                </li>
-                <li>
-                    <img src="{{  asset('img/slider2.jpg') }}"> <!-- random image -->
-                    <div class="caption center-align">
-                        <h3>Choisies le mode de jeu qui te convient</h3>
-                        <a class="btn waves-effect white black-text darken-text-2 creaButton" href="/register">Crée ton kwiky !</a><br/>
-                        <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="/login">Connectes toi !</a>
-                    </div>
-                </li>
-                <li>
-                    <img src="{{  asset('img/slider4.jpg') }}"> <!-- random image -->
-                    <div class="caption center-align">
-                        <h3>Joues où tu veux, où tu le sens !</h3>
-                        <a class="btn waves-effect white black-text darken-text-2 creaButton" href="/register">Crée ton kwiky !</a><br/>
-                        <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="/login">Connectes toi !</a>
-                    </div>
-                </li>
-                <li>
-                    <img src="{{  asset('img/slider5.jpg') }}"> <!-- random image -->
-                    <div class="caption center-align">
-                        <h3>Bloqué ? Appel vite un kwiky</h3>
-                        <a class="btn waves-effect white black-text darken-text-2 creaButton" href="/register">Crée ton kwiky !</a><br/>
-                        <a class="btn waves-effect btn teal accent-2 white-text darken-text-2" href="/login">Connectes toi !</a>
-                    </div>
-                </li>
-            </ul>
         </div>
     </div>
-</div>
     {% block javascripts %}
         <script>
-            $(document).ready(function(){
+            $(document).ready(function () {
                 $('.slider').slider();
             });
         </script>
