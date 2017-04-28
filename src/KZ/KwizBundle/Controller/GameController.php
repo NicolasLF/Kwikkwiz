@@ -239,6 +239,9 @@ class GameController extends Controller
         $em->persist($game);
         $em->flush();
         return $square;
+    }
+    public function setTurns()
+    {
 
     }
     public function turn(Party $party)
@@ -263,7 +266,7 @@ class GameController extends Controller
 
             }
         }
-
+        $this->setTurns();
     }
 
     public function jsToPhp($id, $query)
