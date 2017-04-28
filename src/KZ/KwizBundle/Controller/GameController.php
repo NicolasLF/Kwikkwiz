@@ -109,6 +109,7 @@ class GameController extends Controller
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
+            var_dump($isTurn);
             if ($this->startGame($party)) {
                 $this->setTurns($party);
             }
@@ -116,7 +117,7 @@ class GameController extends Controller
             $isTurn = 2;
         }
         if($isTurn==0 or $isTurn==2){
-            header("Refresh: 5");
+            header("Refresh: 1");
         }else if($isTurn==-1){
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
