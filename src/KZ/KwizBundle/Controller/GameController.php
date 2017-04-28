@@ -103,7 +103,6 @@ class GameController extends Controller
                 'user' => $user
             ));
 
-
         $square = $game[0]->getSquare();
         if ($square !== NULL){
             if ($square->getCategory()->getName() == 'Q') {
