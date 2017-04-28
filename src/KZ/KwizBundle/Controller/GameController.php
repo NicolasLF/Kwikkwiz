@@ -68,7 +68,7 @@ class GameController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $questions = $em->getRepository('KZKwizBundle:Question')->findAll();
-        $i = rand(0,count($questions));
+        $i = rand(0,count($questions)-1);
         return $questions[$i];
     }
     public function getOneAnswer($question)
@@ -91,15 +91,21 @@ class GameController extends Controller
         );
         return $category;
     }
-    public function verifAnswerAction(Answer $answer)
+    public function verifAnswerAction(Answer $answer, Party $party)
     {
-        
+       $status = $answer->getCorrect();
+       if($status==1) {
+           $this->turn($party);
+       }
+       else{
+               $this->setTurns($party);
+       }
     }
     public function indexAction(Party $party)
     {
         $question = $this->getOneQuestion();
         $answers = $this->getOneAnswer($question);
-        $category = $this->getThisCategory($question);
+//      $category = $this->getThisCategory($question);
         $board = $this->getBoard($party);
         if ($party->getFull()==true) {
             $isTurn = $this->isTurn($party);
@@ -110,11 +116,12 @@ class GameController extends Controller
             $isTurn = 2;
         }
         if($isTurn==0 or $isTurn==2){
-            header("Refresh: 1;url='/game/".$party->getId()."'");
+            header("Refresh: 5");
         }else if($isTurn==-1){
             $this->redirectToRoute('kz_kwiz_endGame', array('id'=>$party));
         }
-        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'answers'=>$answers, 'cat'=>$category]);
+
+        return $this->render('KZKwizBundle:Game:game.html.twig', ['board' => $board, 'isTurn'=>$isTurn, 'question'=>$question, 'answers'=>$answers, 'party'=>$party]);
     }
 
     public function historyAction(Party $party)
@@ -245,45 +252,39 @@ class GameController extends Controller
             }
         }
     }
-    public function isTurn (Party $party)
+    public function isTurn(Party $party)
     {
         if($party->getActive()==0){
             return -1;
         }
         $em = $this->getDoctrine()->getManager();
-        $status = $em->getRepository('KZKwizBundle:Game')->findOneBy(
+        $status = $em->getRepository('KZKwizBundle:Game')->findBy(
             array(
                 'party' => $party,
                 'user' => $this->getUser()
             )
         );
-        return $status->getTurn();
+
+        return $status[0]->getTurn();
     }
     public function turn(Party $party)
     {
         $dice = rand(1, 6);
+        $this->move($party, $this->getUser(), $dice);
         $position = $this->playerPositionAction($party, $this->getUser()->getId());
         $square = $this->getThisSquare($party, $position);
-        $turn = true;
-
-        while ($turn == true) {
-            if ($square->getCategory() == 'Q') {
-                //if true
-                $this->move($party, $this->getUser(), $dice);
-            } else if ($square->getCategory() == ' B') {
-                $this->bonusAction($party);
-            } else if ($square->getCategory() == 'M') {
-                $this->malusAction($party);
-            } else if ($square->getCategory() == 'P') {
-                $this->piegeAction($party);
-            } else if ($square->getCategory() == 'A') {
-                $this->randomAction($piege);
-            } else if ($square->getCategory() == 'J') {
-                $this->prisonAction($piege);
-            }
+        if ($square->getCategory() == 'Q') {
+            $this->getOneQuestion();
+        } else if ($square->getCategory() == ' B') {
+            $this->bonusAction($party);
+        } else if ($square->getCategory() == 'M') {
+            $this->malusAction($party);
+        } else if ($square->getCategory() == 'P') {
+            $this->piegeAction($party);
+        } else if ($square->getCategory() == 'A') {
+            $this->randomAction($party);
         }
 
-        $this->setTurns($party);
     }
 
     public function bonusAction($party)
